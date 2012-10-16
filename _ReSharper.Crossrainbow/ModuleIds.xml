@@ -1,0 +1,28 @@
+<Modules>
+  <Module PersistentId="6BB69EA1-47D1-44F4-5058-2EE23F77647D" ModuleId="Crossrainbow" />
+  <Module PersistentId="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System" />
+  <Module PersistentId="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Xml" />
+  <Module PersistentId="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Core" />
+  <Module PersistentId="UnityEngine, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEngine" />
+  <Module PersistentId="UnityEditor, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEditor" />
+  <Module PersistentId="Boo.Lang, Version=2.0.9.5, Culture=neutral, PublicKeyToken=32c39770e9a21a67" ModuleId="Boo.Lang" />
+  <Module PersistentId="UnityScript, Version=1.0.0.0, Culture=neutral" ModuleId="UnityScript" />
+  <Module PersistentId="JetBrains.Annotations, Version=5.1.3000.12, Culture=neutral, PublicKeyToken=1010a0d8d6380325" ModuleId="JetBrains.Annotations" />
+  <Module PersistentId="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="mscorlib" />
+  <Module PersistentId="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Xml_1" />
+  <Module PersistentId="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System_1" />
+  <Module PersistentId="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Core_1" />
+  <Module PersistentId="UnityEngine, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEngine_1" />
+  <Module PersistentId="Boo.Lang, Version=2.0.9.5, Culture=neutral, PublicKeyToken=32c39770e9a21a67" ModuleId="Boo.Lang_1" />
+  <Module PersistentId="UnityScript, Version=1.0.0.0, Culture=neutral" ModuleId="UnityScript_1" />
+  <Module PersistentId="UnityEditor, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEditor_1" />
+  <Module PersistentId="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="mscorlib_1" />
+  <Module PersistentId="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Xml_2" />
+  <Module PersistentId="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System.Core_2" />
+  <Module PersistentId="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="System_2" />
+  <Module PersistentId="UnityEngine, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEngine_2" />
+  <Module PersistentId="Boo.Lang, Version=2.0.9.5, Culture=neutral, PublicKeyToken=32c39770e9a21a67" ModuleId="Boo.Lang_2" />
+  <Module PersistentId="UnityScript, Version=1.0.0.0, Culture=neutral" ModuleId="UnityScript_2" />
+  <Module PersistentId="UnityEditor, Version=0.0.0.0, Culture=neutral" ModuleId="UnityEditor_2" />
+  <Module PersistentId="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ModuleId="mscorlib_2" />
+</Modules>

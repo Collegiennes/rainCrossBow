@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>9.0.21022</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{6BB69EA1-47D1-44F4-5058-2EE23F77647D}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace>Irrelevant</RootNamespace>
+	<AssemblyName>Irrelvant</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_3_0;UNITY_3_3;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+	<Reference Include="Boo.Lang">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Mono/lib/mono/unity/Boo.Lang.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityScript">
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Mono/lib/mono/unity/UnityScript.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\Bullets\BowBulletBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Bullets\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Bullets\CrossBulletBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Bullets\HitBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Bullets\HurterBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Bullets\RainBulletBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Common\ArrayHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\BoolHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\ColorEx.cs" />
+     <Compile Include="Assets\Scripts\Common\ColorHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\ConditionalBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Common\Easing.cs" />
+     <Compile Include="Assets\Scripts\Common\Enums.cs" />
+     <Compile Include="Assets\Scripts\Common\GameObjectEx.cs" />
+     <Compile Include="Assets\Scripts\Common\KeyboardManager.cs" />
+     <Compile Include="Assets\Scripts\Common\MathHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\MouseManager.cs" />
+     <Compile Include="Assets\Scripts\Common\Point.cs" />
+     <Compile Include="Assets\Scripts\Common\RandomHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\StringHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\TimedButtonState.cs" />
+     <Compile Include="Assets\Scripts\Common\VectorEx.cs" />
+     <Compile Include="Assets\Scripts\Enemies\BirdBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\CarrierBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ClockBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\DrillerBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EverynianBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\HurterSpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemies\PowerUpBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\SingleShotBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\WallBehaviour.cs" />
+     <Compile Include="Assets\Scripts\BackgroundGenerator.cs" />
+     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
+     <Compile Include="Assets\Scripts\ColorShifting.cs" />
+     <Compile Include="Assets\Scripts\FlickerOut.cs" />
+     <Compile Include="Assets\Scripts\FlickerSize.cs" />
+     <Compile Include="Assets\Scripts\Flyby.cs" />
+     <Compile Include="Assets\Scripts\KeyboardInstanciator.cs" />
+     <Compile Include="Assets\Scripts\Level.cs" />
+     <Compile Include="Assets\Scripts\meshStrobe.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Setup.cs" />
+     <Compile Include="Assets\Scripts\Shooting.cs" />
+     <Compile Include="Assets\Scripts\Stroboscope.cs" />
+     <Compile Include="Assets\Scripts\TimeCounter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
+	

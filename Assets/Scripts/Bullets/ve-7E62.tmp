@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections;
+using UnityEngine;
+
+class RainBulletBehaviour : Bullet
+{
+    const float Speed = 30;
+
+    static readonly float[] Power = { 1, 2, 4 };
+
+    [HideInInspector]
+    public Vector3 Direction = Vector3.up;
+
+    protected override void OnHit(Shooting shooting, Enemy enemy, Vector3 contactPoint)
+    {
+        var level = shooting.RainLevel;
+        enemy.Health -= Power[Math.Min(level - 1, 2)];
+
+        if (level < 3)
+            Destroy(gameObject);
+
+        base.OnHit(shooting, enemy, contactPoint);
+    }
+
+    void Update()
+    {
+        if (Dead) return;
+
+        BeforeUpdate();
+
+        transform.position += Time.deltaTime * Speed * Direction;
+
+        AfterUpdate();
+    }
+}
