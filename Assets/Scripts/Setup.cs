@@ -103,11 +103,11 @@ class Setup : MonoBehaviour
             level.AddCarrier(new HurterSpawnState { Position = -5, AtTime = i * 3 + 8, ShootEvery = 0.5f, ShootRatio = Math.Abs(1) % 5 });
             level.AddCarrier(new HurterSpawnState { Position = 5, AtTime = i * 3 + 8, ShootEvery = 0.5f, ShootRatio = Math.Abs(1) % 5 });
 
-            level.AddCarrier(new HurterSpawnState { Position = -2, AtTime = i * 6 + 8, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
-            level.AddCarrier(new HurterSpawnState { Position = 2, AtTime = i * 6 + 8, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
+            level.AddCarrier(new HurterSpawnState { Position = -2, AtTime = i * 6 + 16, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
+            level.AddCarrier(new HurterSpawnState { Position = 2, AtTime = i * 6 + 16, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
 
 
-            level.AddCarrier(new HurterSpawnState { Position = 0, AtTime = i * 6 + 9, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
+            level.AddCarrier(new HurterSpawnState { Position = 0, AtTime = i * 6 + 18, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
 
 
 
@@ -115,6 +115,12 @@ class Setup : MonoBehaviour
         }
 
 
+        level.AddDrill(new SpawnState { Position = 8, AtTime = 6 });
+        level.AddDrill(new SpawnState { Position = -8, AtTime = 7 });
+        level.AddDrill(new SpawnState { Position = 6, AtTime = 8 });
+        level.AddDrill(new SpawnState { Position = -6, AtTime = 9 });
+        level.AddDrill(new SpawnState { Position = 3, AtTime = 10 });
+        level.AddDrill(new SpawnState { Position = -3, AtTime = 11 });
 
 
         // Part I
@@ -186,7 +192,8 @@ class Setup : MonoBehaviour
 
         level.AddEverynian(new SpawnState { Position = 0, AtTime = 100 });
         level.AddClock(new ClockSpawnState { Position = 3, AtTime = 102, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 102, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });  
-        
+        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 102, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
+
+        level.Finish();
     }
 }

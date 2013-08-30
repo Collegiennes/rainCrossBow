@@ -7,7 +7,7 @@ class BowBulletBehaviour : Bullet
 {
     const float Speed = 1;
 
-    static readonly float[] Power = { 15, 30, 60 };
+    static readonly float[] Power = { 25, 35, 70 };
 
     public bool PlayerShot;
     public GameObject CharginTemplate;
@@ -58,7 +58,7 @@ class BowBulletBehaviour : Bullet
         }
 
         SinceAlive += Time.deltaTime;
-        if (SinceAlive >= 0.5f * ((Shooting.BowLevel - 1) / 6f + 1))
+        if (SinceAlive >= 0.5f * ((Shooting.BowLevel - 1) / 2f + 1))
             Destroy(gameObject);
     }
 

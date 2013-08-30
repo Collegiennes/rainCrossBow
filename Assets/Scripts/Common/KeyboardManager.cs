@@ -32,6 +32,11 @@ public class KeyboardManager : MonoBehaviour, IKeyboard
         if (!registeredKeys.Contains(key))
             registeredKeys.Add(key);
     }
+    public void RegisterKeys(params KeyCode[] keys)
+    {
+        foreach (var k in keys)
+            RegisterKey(k);
+    }
 
     public TimedButtonState GetKeyState(KeyCode key)
     {
@@ -69,6 +74,7 @@ public class KeyboardManager : MonoBehaviour, IKeyboard
 public interface IKeyboard
 {
     void RegisterKey(KeyCode key);
+    void RegisterKeys(params KeyCode[] key);
     TimedButtonState GetKeyState(KeyCode key);
 }
 

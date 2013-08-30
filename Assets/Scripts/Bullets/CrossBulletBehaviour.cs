@@ -7,10 +7,11 @@ class CrossBulletBehaviour : Bullet
 {
     const float TerminalSpeed = 25;
 
-    static readonly float[] Power = { 5, 4.5f, 4.25f };
+    static readonly float[] Power = { 6.0f, 5.5f, 6.0f };
 
     float SinceAlive;
     Enemy LockedTo;
+    float SinceVeryClose;
 
     [HideInInspector]
     public Vector3 Direction = Vector3.up;
@@ -27,6 +28,7 @@ class CrossBulletBehaviour : Bullet
     void TryLock()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy").Select(x => x.GetComponent<Enemy>());
+        SinceVeryClose = 0;
 
         var enemy = enemies.Where(e => !e.Dead)
             .OrderBy(e => (e.LockedOn).AsNumeric())
@@ -85,6 +87,20 @@ class CrossBulletBehaviour : Bullet
 
             Direction = Vector3.Slerp(Direction, heading, headingSpeed);
             transform.rotation = Quaternion.LookRotation(Direction);
+
+            // test for infinite loop around dude
+            if (Vector3.Distance(transform.position, LockedTo.transform.position) < 2.0f)
+            {
+                SinceVeryClose += Time.deltaTime;
+                if (SinceVeryClose > 1.5f)
+                {
+                    // fake force collide
+                    OnCollide(LockedTo.collider, transform.position);
+                    return;
+                }
+            }
+            else
+                SinceVeryClose = 0;
         }
 
         var speed = Mathf.Lerp(5, TerminalSpeed, Easing.EaseIn(Mathf.Clamp01(SinceAlive * 1.25f), EasingType.Quintic));

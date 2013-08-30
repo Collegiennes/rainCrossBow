@@ -20,6 +20,7 @@ class EverynianBehaviour : Enemy
         bow.SetActiveRecursively(false); cross.SetActiveRecursively(false); rain.SetActiveRecursively(false);
 
         var enabledId = RandomHelper.Random.Next(0, 3);
+        //var enabledId = 1;
         if (enabledId == 0) { bow.SetActiveRecursively(true); ToSpawn = bow; }
         if (enabledId == 1) { cross.SetActiveRecursively(true); ToSpawn = cross; }
         if (enabledId == 2) { rain.SetActiveRecursively(true); ToSpawn = rain; }
@@ -29,10 +30,11 @@ class EverynianBehaviour : Enemy
     {
         base.OnDie();
 
-        var go = (GameObject)Instantiate(ToSpawn, transform.position, Quaternion.Euler(0, 90, 0));
+        var go = (GameObject)Instantiate(ToSpawn.transform.parent.gameObject);
+        go.transform.position = transform.position;
         go.transform.localScale = VectorEx.Modulate(new Vector3(0.5967718f, 0.5967718f, 0.5967718f),
                                                     go.transform.localScale);
-        go.GetComponent<PowerUpBehaviour>().enabled = true;
+        go.FindChild(ToSpawn.name).GetComponent<PowerUpBehaviour>().enabled = true;
 
         go = (GameObject)Instantiate(BirdTemplate);
         go.transform.position = transform.position;

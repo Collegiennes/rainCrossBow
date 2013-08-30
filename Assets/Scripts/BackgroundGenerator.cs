@@ -3,7 +3,7 @@ using UnityEngine;
 
 class BackgroundGenerator : MonoBehaviour
 {
-    const float ScrollSpeed = 0.005f;
+    const float ScrollSpeed = 0.0075f;
     const float MaxScroll = 30;
 
     float TotalScroll;

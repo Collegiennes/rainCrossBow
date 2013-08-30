@@ -1,0 +1,119 @@
+fileFormatVersion: 2
+guid: 91669f3ecb30b4224a9ff94fc78ebec2
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    4300000: Sweep NURBS
+    4300002: Sweep NURBS.2
+    4300004: Cap 1
+    4300008: Cone
+    4300010: Cone.2
+    4300012: Cone.3
+    4300014: Cone.4
+    4300016: Cone.5
+    4300018: Cone.6
+    4300020: Cone.7
+    4300022: TONGUE
+    4300024: Cylinder
+    4300026: Cube
+    4300028: Cylinder.2
+    4300030: Cube.2
+    4300032: Cylinder.3
+    4300034: Cube.3
+    4300036: Cylinder.4
+    4300038: Loft NURBS
+    4300040: Cap 1.2
+    4300042: Cap 2.2
+    4300044: Cube.4
+    4300046: Sweep NURBS.3
+    4300048: Sweep NURBS.4
+    4300050: Cap 1.3
+    4300052: Null Object-Cube
+    4300054: Cone.8
+    4300056: Cone.9
+    4300058: Cone.10
+    4300060: Cone.11
+    4300062: Cone.12
+    4300064: Cone.13
+    4300066: Cone.14
+    4300068: TONGUE.2
+    4300070: Cylinder.5
+    4300072: Cube.5
+    4300074: Cylinder.6
+    4300076: Cube.6
+    4300078: Cylinder.7
+    4300080: Cube.7
+    4300082: Cylinder.8
+    4300084: Loft NURBS.2
+    4300086: Cap 1.4
+    4300088: Cap 2.4
+    4300090: Cube.8
+    4300092: Null Object-Cube.2
+    4300094: Sweep NURBS.5
+    4300096: Null Object-Cube.3
+    4300098: Null Object-Cube.4
+    4300100: Sweep NURBS.6
+    4300104: Cone.15
+    4300106: Cone.16
+    4300108: Cone.17
+    4300110: Cone.18
+    4300112: Cone.19
+    4300114: Cone.26
+    4300116: Cylinder.9
+    4300118: Cylinder.10
+    4300120: Cylinder.11
+    4300122: Cube.9
+    4300124: Cylinder.12
+    7400000: C4D Animation Take
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

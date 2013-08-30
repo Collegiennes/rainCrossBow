@@ -18,13 +18,7 @@ class PlayerController : MonoBehaviour
     void Start()
     {
         Keyboard = KeyboardManager.Instance;
-
-        Keyboard.RegisterKey(KeyCode.LeftArrow);
-        Keyboard.RegisterKey(KeyCode.RightArrow);
-        Keyboard.RegisterKey(KeyCode.UpArrow);
-        Keyboard.RegisterKey(KeyCode.DownArrow);
-        Keyboard.RegisterKey(KeyCode.M);
-        Keyboard.RegisterKey(KeyCode.N);
+        Keyboard.RegisterKeys(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.UpArrow);
     }
 
     void FixedUpdate()
@@ -33,28 +27,23 @@ class PlayerController : MonoBehaviour
 
         Quaternion destinationTilt = Quaternion.identity;
 
-        // Movement
-        if (Keyboard.GetKeyState(KeyCode.LeftArrow).State.IsDown())
-        {
-            Velocity += Vector3.left * Time.deltaTime * MovingSpeed;
-            destinationTilt *= Quaternion.AngleAxis(TiltDegrees, Vector3.up);
-        }
-        if (Keyboard.GetKeyState(KeyCode.RightArrow).State.IsDown()) 
-        {
-            Velocity += Vector3.right * Time.deltaTime * MovingSpeed;
-            destinationTilt *= Quaternion.AngleAxis(-TiltDegrees, Vector3.up);
-        }
-        if (Keyboard.GetKeyState(KeyCode.UpArrow).State.IsDown()) 
-        {
-            Velocity += Vector3.up * Time.deltaTime * MovingSpeed;
-        }
-        if (Keyboard.GetKeyState(KeyCode.DownArrow).State.IsDown()) 
-        {
-            Velocity += Vector3.down * Time.deltaTime * MovingSpeed;
-        }
+        var gamepadInput = GamepadsManager.Instance.Any;
 
-        if (Keyboard.GetKeyState(KeyCode.M).State == ComplexButtonState.Pressed)
-            AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
+        var horizAxis = Mathf.Clamp(gamepadInput.LeftStick.SquaredPosition.x +
+                (gamepadInput.DPad.Left.State.IsDown() || Keyboard.GetKeyState(KeyCode.LeftArrow).State.IsDown() ? -1 : 0) +
+                (gamepadInput.DPad.Right.State.IsDown() || Keyboard.GetKeyState(KeyCode.RightArrow).State.IsDown() ? 1 : 0), -1, 1);
+
+        var vertAxis = Mathf.Clamp(gamepadInput.LeftStick.SquaredPosition.y +
+                (gamepadInput.DPad.Down.State.IsDown() || Keyboard.GetKeyState(KeyCode.DownArrow).State.IsDown() ? -1 : 0) +
+                (gamepadInput.DPad.Up.State.IsDown() || Keyboard.GetKeyState(KeyCode.UpArrow).State.IsDown() ? 1 : 0), -1, 1);
+
+        if (horizAxis != 0)
+        {
+            Velocity += Vector3.right * Time.deltaTime * MovingSpeed * horizAxis;
+            destinationTilt *= Quaternion.AngleAxis(TiltDegrees * horizAxis, Vector3.up);
+        }
+        if (vertAxis != 0) 
+            Velocity += Vector3.up * Time.deltaTime * MovingSpeed * vertAxis;
 
         Tilt = Quaternion.Slerp(Tilt, destinationTilt, 0.25f);
 
@@ -129,22 +118,28 @@ class PlayerController : MonoBehaviour
             GetComponent<Shooting>().RainLevel = GetComponent<Shooting>().CrossLevel = GetComponent<Shooting>().BowLevel = 1;
         }
 
-        if (otherGo.tag == "Powerup" && otherGo.transform.parent == null)
+        if (otherGo.tag == "Powerup" && otherGo.transform.parent.parent == null)
         {
             if (otherGo.name.Contains("bow"))
             {
                 GetComponent<Shooting>().BowLevel = Mathf.Min(3, GetComponent<Shooting>().BowLevel + 1);
-                Destroy(otherGo);
+                if (GetComponent<Shooting>().BowLevel == 3)
+                    Wait.Until(t => t >= 10, () => GetComponent<Shooting>().BowLevel = Math.Min(GetComponent<Shooting>().BowLevel, 2));
+                Destroy(otherGo.transform.parent.gameObject);
             }
             else if (otherGo.name.Contains("cross"))
             {
                 GetComponent<Shooting>().CrossLevel = Mathf.Min(3, GetComponent<Shooting>().CrossLevel + 1);
-                Destroy(otherGo);
+                if (GetComponent<Shooting>().CrossLevel == 3)
+                    Wait.Until(t => t >= 8, () => GetComponent<Shooting>().CrossLevel = Math.Min(GetComponent<Shooting>().CrossLevel, 2));
+                Destroy(otherGo.transform.parent.gameObject);
             }
             else if (otherGo.name.Contains("rain"))
             {
                 GetComponent<Shooting>().RainLevel = Mathf.Min(3, GetComponent<Shooting>().RainLevel + 1);
-                Destroy(otherGo);
+                if (GetComponent<Shooting>().RainLevel == 3)
+                    Wait.Until(t => t >= 6, () => GetComponent<Shooting>().RainLevel = Math.Min(GetComponent<Shooting>().RainLevel, 2));
+                Destroy(otherGo.transform.parent.gameObject);
             }
         }
     }

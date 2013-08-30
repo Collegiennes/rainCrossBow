@@ -1,0 +1,257 @@
+fileFormatVersion: 2
+guid: 6f2030c19d0384d24870bb6cad031d97
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    4300000: Cone
+    4300002: Sphere
+    4300004: Cone.2
+    4300006: Sphere.2
+    4300008: Cone.3
+    4300010: Sphere.3
+    4300012: Cube
+    4300014: Cube.2
+    4300016: Cube.3
+    4300018: Cube.4
+    4300020: Cube.5
+    4300022: chr_arm_l
+    4300024: chr_forearm_l
+    4300026: chr_forearm_l.2
+    4300028: Cube.6
+    4300030: Cube.7
+    4300032: Cube.8
+    4300034: chr_neck
+    4300036: Loft NURBS
+    4300038: Cap 1
+    4300040: Cap 2
+    4300042: Loft NURBS.2
+    4300044: Cap 1.2
+    4300046: Cap 2.2
+    4300048: Sweep NURBS
+    4300050: Sweep NURBS.2
+    4300052: Cap 1.3
+    4300056: Cone.4
+    4300058: Cone.5
+    4300060: Cone.6
+    4300062: Cone.7
+    4300064: Cone.8
+    4300066: Cone.9
+    4300068: Cone.10
+    4300070: TONGUE
+    4300072: Cylinder
+    4300074: Cube.9
+    4300076: Cylinder.2
+    4300078: Cube.10
+    4300080: Cylinder.3
+    4300082: Cube.11
+    4300084: Cylinder.4
+    4300086: Loft NURBS.3
+    4300088: Cap 1.4
+    4300090: Cap 2.4
+    4300092: Cube.12
+    4300094: chr_cuisse_l
+    4300096: Cube.13
+    4300098: Cube.14
+    4300100: Cube.15
+    4300102: chr_tibia_l
+    4300104: chr_cuisse_r
+    4300106: Cube.16
+    4300108: Cube.17
+    4300110: Cube.18
+    4300112: chr_tibia_r
+    4300114: chr_arm_l.2
+    4300116: chr_forearm_l.3
+    4300118: chr_forearm_l.4
+    4300120: Cube.19
+    4300122: Cube.20
+    4300124: Cube.21
+    4300126: Cube.22
+    4300128: Cube.23
+    4300130: Cube.24
+    4300132: Cube.25
+    4300134: Cube.26
+    4300136: chr_arm_l.3
+    4300138: chr_forearm_l.5
+    4300140: chr_forearm_l.6
+    4300142: Cube.27
+    4300144: Cube.28
+    4300146: Cube.29
+    4300148: chr_neck.2
+    4300150: Loft NURBS.4
+    4300152: Cap 1.5
+    4300154: Cap 2.5
+    4300156: Loft NURBS.5
+    4300158: Cap 1.6
+    4300160: Cap 2.6
+    4300162: Sweep NURBS.3
+    4300164: Sweep NURBS.4
+    4300166: Cap 1.7
+    4300170: Cone.11
+    4300172: Cone.12
+    4300174: Cone.13
+    4300176: Cone.14
+    4300178: Cone.15
+    4300180: Cone.16
+    4300182: Cone.17
+    4300184: TONGUE.2
+    4300186: Cylinder.5
+    4300188: Cube.30
+    4300190: Cylinder.6
+    4300192: Cube.31
+    4300194: Cylinder.7
+    4300196: Cube.32
+    4300198: Cylinder.8
+    4300200: Loft NURBS.6
+    4300202: Cap 1.8
+    4300204: Cap 2.8
+    4300206: Cube.33
+    4300208: chr_cuisse_l.2
+    4300210: Cube.34
+    4300212: Cube.35
+    4300214: Cube.36
+    4300216: chr_tibia_l.2
+    4300218: chr_cuisse_r.2
+    4300220: Cube.37
+    4300222: Cube.38
+    4300224: Cube.39
+    4300226: chr_tibia_r.2
+    4300228: chr_arm_l.4
+    4300230: chr_forearm_l.7
+    4300232: chr_forearm_l.8
+    4300234: Cube.40
+    4300236: Cube.41
+    4300238: Cube.42
+    4300240: Cube.43
+    4300242: Cube.44
+    4300244: Cube.45
+    4300246: Cube.46
+    4300248: Cube.47
+    4300250: chr_neck.3
+    4300252: Loft NURBS.7
+    4300254: Cap 1.9
+    4300256: Cap 2.9
+    4300258: Loft NURBS.8
+    4300260: Cap 1.10
+    4300262: Cap 2.10
+    4300264: Sweep NURBS.5
+    4300266: Sweep NURBS.6
+    4300268: Cap 1.11
+    4300270: Cone.29
+    4300272: Cone.18
+    4300274: Cone.19
+    4300276: Cone.20
+    4300278: Cone.21
+    4300280: Cone.22
+    4300282: Cone.23
+    4300284: Cone.24
+    4300286: TONGUE.3
+    4300288: Cylinder.9
+    4300290: Cube.48
+    4300292: Cylinder.10
+    4300294: Cube.49
+    4300296: Cylinder.11
+    4300298: Cube.50
+    4300300: Cylinder.12
+    4300302: Null Object-Cube
+    4300304: Null Object-Cube.2
+    4300306: chr_cuisse_l.3
+    4300308: Cube.51
+    4300310: Cube.52
+    4300312: Cube.53
+    4300314: chr_tibia_l.3
+    4300316: chr_cuisse_r.3
+    4300318: Cube.54
+    4300320: Cube.55
+    4300322: Cube.56
+    4300324: chr_tibia_r.3
+    4300326: chr_arm_r
+    4300328: chr_forearm_r
+    4300330: chr_forearm_r.2
+    4300332: Cube.57
+    4300334: Cube.58
+    4300336: Cube.59
+    4300338: chr_arm_l.5
+    4300340: chr_forearm_l.9
+    4300342: chr_forearm_l.10
+    4300344: Cube.60
+    4300346: Cube.61
+    4300348: Cube.62
+    4300350: Loft NURBS.11
+    4300352: Loft NURBS.12
+    4300354: Sweep NURBS.9
+    4300356: Sweep NURBS.10
+    4300360: Cone.30
+    4300362: Cone.31
+    4300364: Cone.32
+    4300366: Cone.33
+    4300368: Cone.34
+    4300370: Cone.35
+    4300372: Cone.42
+    4300374: Cylinder.17
+    4300376: Cylinder.18
+    4300378: Cylinder.19
+    4300380: Cylinder.20
+    4300382: Cube.63
+    4300384: Cube.64
+    4300386: Cube.65
+    4300388: Cube.66
+    4300390: Cube.67
+    4300392: Cube.68
+    4300394: Cube.69
+    4300396: Cube.70
+    4300398: Cube.71
+    4300400: Cube.72
+    4300402: Cube.73
+    7400000: C4D Animation Take
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

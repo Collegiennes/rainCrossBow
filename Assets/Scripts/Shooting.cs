@@ -29,13 +29,6 @@ class Shooting : MonoBehaviour
 
     void Start()
     {
-        Keyboard = KeyboardManager.Instance;
-
-        Keyboard.RegisterKey(KeyCode.A);
-        Keyboard.RegisterKey(KeyCode.S);
-        Keyboard.RegisterKey(KeyCode.D);
-        Keyboard.RegisterKey(KeyCode.Space);
-
         Array.Copy(EnergyRequirements, EnergyLeft, 3);
 
         Headz = gameObject.FindChild("headz");
@@ -46,6 +39,8 @@ class Shooting : MonoBehaviour
         CharginLazor = gameObject.FindChild("vfx_charginmahlazor");
 
         Controller = GetComponent<PlayerController>();
+        Keyboard = KeyboardManager.Instance;
+        Keyboard.RegisterKeys(KeyCode.A, KeyCode.S, KeyCode.D);
 
         RainHead.SetActiveRecursively(true);
         BowHead.SetActiveRecursively(false);
@@ -73,10 +68,12 @@ class Shooting : MonoBehaviour
         else
             CharginLazor.FindChild("Sphere.2").renderer.material = ColorShifting.Materials["clr_GreyPale"];
 
+        var gamepadInput = GamepadsManager.Instance.Any;
+
         // Attacks
-        bool rainShot = Keyboard.GetKeyState(KeyCode.A).State.IsDown();
-        bool crossShot = Keyboard.GetKeyState(KeyCode.S).State.IsDown();
-        bool bowShot = Keyboard.GetKeyState(KeyCode.D).State.IsDown();
+        bool rainShot = gamepadInput.RightTrigger.Value > 0.1 || gamepadInput.RightShoulder.State.IsDown() || Keyboard.GetKeyState(KeyCode.A).State.IsDown();
+        bool crossShot = gamepadInput.LeftTrigger.Value > 0.1 || gamepadInput.LeftShoulder.State.IsDown() || Keyboard.GetKeyState(KeyCode.S).State.IsDown();
+        bool bowShot = gamepadInput.A.State.IsDown() || gamepadInput.X.State.IsDown() || Keyboard.GetKeyState(KeyCode.D).State.IsDown();
 
         if (!rainShot) RainSine = 0;
 
@@ -146,7 +143,7 @@ class Shooting : MonoBehaviour
             var go = (GameObject) Instantiate(BowBullet, transform.position, Quaternion.AngleAxis(90, Vector3.forward));
             go.GetComponent<BowBulletBehaviour>().PlayerShot = true;
             EnergyLeft[1] = EnergyRequirements[1];
-            Wait.Until(t => t >= 0.5f * ((BowLevel - 1) / 6f + 1), () => { SinceBow = 0; });
+            Wait.Until(t => t >= 0.5f * ((BowLevel - 1) / 3f + 1), () => { SinceBow = 0; });
         }
         if (crossShot && EnergyLeft[2] <= 0)
         {

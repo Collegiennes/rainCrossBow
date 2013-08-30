@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5f1ce449418240641b4f455d0d1c2945
+TrueTypeFontImporter:
+  serializedVersion: 2
+  fontSize: 42
+  forceTextureCase: -2
+  characterSpacing: 1
+  characterPadding: 0
+  includeFontData: 1
+  use2xBehaviour: 0
+  fontNames:
+  - Alte Haas Grotesk
+  - Arial
+  customCharacters: 
+  fontRenderingMode: 0
+  userData: 
