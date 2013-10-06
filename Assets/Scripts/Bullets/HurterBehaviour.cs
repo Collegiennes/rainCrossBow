@@ -1,17 +1,40 @@
+using System;
 using UnityEngine;
 
 class HurterBehaviour : Bullet
 {
-    const float ConstantSpeed = 0.08f;
-
     [HideInInspector]
-    public Vector3 HomingAim = Vector3.down;
+    public Vector3 HomingAim;
+    [HideInInspector]
+    public Func<float, float> Acceleration;
+    [HideInInspector]
+    public float MinSpeed;
+    [HideInInspector]
+    public float MaxSpeed;
+
+    public float Velocity;
+    public bool NoInertia;
+
+    float SinceAlive;
+
+    public override void Start()
+    {
+        base.Start();
+        SinceAlive = 0;
+    }
 
     void FixedUpdate()
     {
         if (Dead) return;
 
-        transform.position += HomingAim * ConstantSpeed;
+        Velocity += Acceleration(SinceAlive);
+        Velocity = Mathf.Clamp(Velocity, MinSpeed, MaxSpeed);
+
+        transform.position += HomingAim * Velocity;
+        if (!NoInertia)
+            transform.position += 1.125f * Vector3.down * Time.deltaTime;
+
+        SinceAlive += Time.deltaTime;
 
         AfterUpdate();
     }

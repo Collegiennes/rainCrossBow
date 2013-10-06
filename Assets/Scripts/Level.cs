@@ -65,9 +65,6 @@ class Level : MonoBehaviour
 
         thisSpawnedAt.Clear();
 
-        var speedBoost = Mathf.Clamp01(SinceAlive / 60.0f);
-        var lateSpeedBoost = Mathf.Clamp01((SinceAlive - 30.0f) / 60.0f);
-
         for (int i = 0; i < DrillSpawns.Count; i++)
         {
             var spawn = DrillSpawns[i];
@@ -91,9 +88,12 @@ class Level : MonoBehaviour
 
                 foreach (var hs in go.GetComponents<HurterSpawner>())
                 {
-                    hs.ShootEverySeconds = spawn.ShootEvery * (2.0f - speedBoost * 1.25f);
+                    hs.ShootEverySeconds = spawn.ShootEvery;
                     hs.Homing = false;
-                    hs.ShootPauseRatio = spawn.ShootRatio;
+                    hs.ShootPauseTime = spawn.ShootPauseTime;
+                    hs.ShootOffset = spawn.ShootPauseOffset;
+                    hs.Acceleration = spawn.Acceleration;
+                    hs.SinceAlive = spawn.ShootEvery - spawn.TimeDelay;
                 }
             }
             else
@@ -105,7 +105,12 @@ class Level : MonoBehaviour
             var spawn = EverynianSpawns[i];
             if (spawn.AtTime <= SinceAlive)
             {
-                Instantiate(EverynianTemplate, new Vector3(spawn.Position, 10, 0), Quaternion.identity);
+                var go = (GameObject)Instantiate(EverynianTemplate, new Vector3(spawn.Position, 10, 0), Quaternion.identity);
+                var es = go.GetComponent<EverynianBehaviour>();
+
+                if (spawn is EverynianState)
+                    es.ForcedId = (spawn as EverynianState).ForcedPowerup;
+
                 EverynianSpawns.RemoveAt(i--);
             }
             else
@@ -143,9 +148,22 @@ class Level : MonoBehaviour
                 thisSpawnedAt.Add(spawn.Position);
                 var go = (GameObject)Instantiate(SingleShotTemplate, new Vector3(spawn.Position, 10, 0), Quaternion.Euler(0, 90, 0));
                 var hs = go.GetComponent<HurterSpawner>();
-                hs.ShootEverySeconds = spawn.ShootEvery * (2.0f - lateSpeedBoost * 1.25f);
-                hs.Homing = true;
-                hs.ShootPauseRatio = spawn.ShootRatio;
+                hs.ShootEverySeconds = spawn.ShootEvery;
+                hs.ShootPauseTime = spawn.ShootPauseTime;
+                hs.ShootOffset = spawn.ShootPauseOffset;
+                hs.Acceleration = spawn.Acceleration;
+                hs.SinceAlive = spawn.ShootEvery - spawn.TimeDelay;
+                if (spawn is SingleShotSpawnState)
+                {
+                    var ssss = spawn as SingleShotSpawnState;
+                    hs.Homing = ssss.Homing;
+                    hs.BaseAngle = ssss.Angle - 90;
+                    go.GetComponent<SingleShotBehaviour>().invertColors = ssss.Dangerous;
+                }
+                else
+                {
+                    hs.BaseAngle = -90;
+                }
                 SingleShotSpawns.RemoveAt(i--);
             }
             else
@@ -165,10 +183,14 @@ class Level : MonoBehaviour
                 thisSpawnedAt.Add(spawn.Position);
                 var go = (GameObject)Instantiate(ClockTemplate, new Vector3(spawn.Position, 10, 0), Quaternion.Euler(0, 90, 0));
                 var hs = go.GetComponent<HurterSpawner>();
-                hs.ShootEverySeconds = spawn.ShootEvery - speedBoost * 0.125f;
-                hs.ShootPauseRatio = spawn.ShootRatio;
+                hs.ShootEverySeconds = spawn.ShootEvery;
+                hs.ShootPauseTime = spawn.ShootPauseTime;
+                hs.ShootOffset = spawn.ShootPauseOffset;
+                hs.Acceleration = spawn.Acceleration;
+                hs.SinceAlive = spawn.ShootEvery - spawn.TimeDelay;
                 hs.Homing = false;
                 go.GetComponent<ClockBehaviour>().Clockwise = spawn.Clockwise;
+                go.GetComponent<ClockBehaviour>().RotateSpeed = spawn.RotateSpeed;
                 ClockSpawns.RemoveAt(i--);
             }
             else
@@ -186,15 +208,26 @@ public class SpawnState
 public class HurterSpawnState : SpawnState
 {
     public float ShootEvery;
-    public int ShootRatio;
+    public int ShootPauseTime;
+    public int ShootPauseOffset;
+    public Func<float, float> Acceleration = _ => 0;
+    public float TimeDelay = 1;
 }
 
 public class ClockSpawnState : HurterSpawnState
 {
-    public ClockSpawnState()
-    {
-        ShootEvery = 0.225f;
-    }
-
     public bool Clockwise;
+    public float RotateSpeed;
+}
+
+public class EverynianState : SpawnState
+{
+    public int? ForcedPowerup;
+}
+
+public class SingleShotSpawnState : HurterSpawnState
+{
+    public bool Homing;
+    public float Angle;
+    public bool Dangerous;
 }

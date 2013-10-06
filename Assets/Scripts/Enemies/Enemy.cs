@@ -11,7 +11,7 @@ abstract class Enemy : MonoBehaviour
 
     protected Transform PlayerTransform;
 
-    void Start()
+    protected virtual void Start()
     {
         PlayerTransform = GameObject.Find("Player").transform;
     }

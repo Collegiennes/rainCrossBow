@@ -52,148 +52,155 @@ class Setup : MonoBehaviour
         var level = levelGO.GetComponent<Level>();
         ActiveLevel = level;
 
-        //for (int i = 0; i < 93; i++)
-        //{
-        //    if (RandomHelper.Probability(0.05))
-        //        level.AddEverynian(new SpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i });
-        //    if (RandomHelper.Probability(0.2))
-        //        level.AddWall(new SpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i });
-        //    if (RandomHelper.Probability(0.2))
-        //        level.AddDrill(new SpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i });
-        //    if (RandomHelper.Probability(0.2))
-        //        level.AddSingleShot(new HurterSpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i, ShootEvery = Random.value, ShootRatio = RandomHelper.Random.Next(1, 6) });
-        //    if (RandomHelper.Probability(0.2))
-        //        level.AddCarrier(new HurterSpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i, ShootEvery = Random.value, ShootRatio = RandomHelper.Random.Next(1, 6) });
-        //    if (RandomHelper.Probability(0.1))
-        //        level.AddClock(new ClockSpawnState { Position = RandomHelper.Random.Next(-7, 8), AtTime = i, ShootRatio = RandomHelper.Random.Next(1, 6), Clockwise = RandomHelper.Probability(0.5) });
-        //}
+        var m = new Dictionary<Events, int>();
 
-        for (int i = 0; i <= 30; i++)
+        var timeOffset = 0;
+        for (int i = 0; i < 100; i++)
         {
-            // Drills
+            var randomEvent = RandomHelper.InEnum<Events>();
+            while (m.ContainsKey(randomEvent))
+                randomEvent = RandomHelper.InEnum<Events>();
 
-            level.AddDrill(new SpawnState { Position = 5, AtTime = i * 30 });
-            level.AddDrill(new SpawnState { Position = -5, AtTime = i * 30 });
-            level.AddDrill(new SpawnState { Position = 3, AtTime = i * 45 });
-            level.AddDrill(new SpawnState { Position = -3, AtTime = i * 45 });
+            timeOffset += AddEvent(level, randomEvent, timeOffset) + RandomHelper.Random.Next(-1, 5);
 
-            level.AddDrill(new SpawnState { Position = 0, AtTime = i * 20 });
+            foreach (var k in m.Keys.ToArray())
+            {
+                m[k] = m[k] + 1;
+                if (m[k] > k.GetMinInterspawn())
+                    m.Remove(k);
+            }
 
-
-            // Clocks
-
-            level.AddClock(new ClockSpawnState { Position = -5, AtTime = i * 13 + 1, ShootRatio = Math.Abs(4) % 5, Clockwise = true });
-            level.AddClock(new ClockSpawnState { Position = 5, AtTime = i * 13 + 1, ShootRatio = Math.Abs(4) % 5, Clockwise = false });
-
-            // Walls	
-
-            level.AddWall(new SpawnState { Position = 2, AtTime = i * 13 });
-            level.AddWall(new SpawnState { Position = -2, AtTime = i * 13 });
-
-            level.AddWall(new SpawnState { Position = 6, AtTime = i * 17 });
-            level.AddWall(new SpawnState { Position = -6, AtTime = i * 17 });
-
-            // Nyans
-
-            level.AddEverynian(new SpawnState { Position = 0, AtTime = i * 10 });
-
-
-            // Carriers
-
-            level.AddCarrier(new HurterSpawnState { Position = -5, AtTime = i * 3 + 8, ShootEvery = 0.5f, ShootRatio = Math.Abs(1) % 5 });
-            level.AddCarrier(new HurterSpawnState { Position = 5, AtTime = i * 3 + 8, ShootEvery = 0.5f, ShootRatio = Math.Abs(1) % 5 });
-
-            level.AddCarrier(new HurterSpawnState { Position = -2, AtTime = i * 6 + 16, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
-            level.AddCarrier(new HurterSpawnState { Position = 2, AtTime = i * 6 + 16, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
-
-
-            level.AddCarrier(new HurterSpawnState { Position = 0, AtTime = i * 6 + 18, ShootEvery = 1.5f, ShootRatio = Math.Abs(1) % 5 });
-
-
-
-
+            m.Add(randomEvent, 0);
         }
 
-
-        level.AddDrill(new SpawnState { Position = 8, AtTime = 6 });
-        level.AddDrill(new SpawnState { Position = -8, AtTime = 7 });
-        level.AddDrill(new SpawnState { Position = 6, AtTime = 8 });
-        level.AddDrill(new SpawnState { Position = -6, AtTime = 9 });
-        level.AddDrill(new SpawnState { Position = 3, AtTime = 10 });
-        level.AddDrill(new SpawnState { Position = -3, AtTime = 11 });
-
-
-        // Part I
-
-        level.AddSingleShot(new HurterSpawnState { Position = -5, AtTime = 45, ShootEvery = 0.5f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = 5, AtTime = 45, ShootEvery = 0.5f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = -3, AtTime = 47, ShootEvery = 0.2f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = 3, AtTime = 47, ShootEvery = 0.2f, ShootRatio = Math.Abs(4) % 5 });
-
-        level.AddCarrier(new HurterSpawnState { Position = -5, AtTime = 50, ShootEvery = 0.5f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 5, AtTime = 50, ShootEvery = 0.5f, ShootRatio = Math.Abs(2) % 5 });
-
-        level.AddWall(new SpawnState { Position = 5, AtTime = 59 });
-        level.AddWall(new SpawnState { Position = -5, AtTime = 59 });
-
-
-        level.AddWall(new SpawnState { Position = 5, AtTime = 53 });
-        level.AddWall(new SpawnState { Position = -5, AtTime = 53 });
-
-        level.AddClock(new ClockSpawnState { Position = 3, AtTime = 53, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 53, ShootRatio = Math.Abs(4) % 5, Clockwise = true });
-
-
-
-
-        level.AddWall(new SpawnState { Position = 3, AtTime = 56 });
-        level.AddWall(new SpawnState { Position = -3, AtTime = 56 });
-
-
-        level.AddWall(new SpawnState { Position = 4, AtTime = 67 });
-        level.AddWall(new SpawnState { Position = -4, AtTime = 67 });
-
-        level.AddWall(new SpawnState { Position = 2, AtTime = 67 });
-        level.AddWall(new SpawnState { Position = -2, AtTime = 67 });
-
-        level.AddClock(new ClockSpawnState { Position = 3, AtTime = 67, ShootRatio = Math.Abs(4) % 5, Clockwise = false });
-        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 67, ShootRatio = Math.Abs(4) % 5, Clockwise = true });
-
-
-        level.AddCarrier(new HurterSpawnState { Position = -5, AtTime = 72, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 5, AtTime = 72, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-
-
-        level.AddCarrier(new HurterSpawnState { Position = -4, AtTime = 72, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 4, AtTime = 72, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-
-
-        level.AddCarrier(new HurterSpawnState { Position = -2, AtTime = 78, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 2, AtTime = 78, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-
-
-        level.AddCarrier(new HurterSpawnState { Position = -1, AtTime = 82, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 1, AtTime = 82, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-
-        level.AddWall(new SpawnState { Position = 0, AtTime = 92 });
-
-        level.AddSingleShot(new HurterSpawnState { Position = -5, AtTime = 94, ShootEvery = 0.5f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = 5, AtTime = 94, ShootEvery = 0.5f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = -3, AtTime = 96, ShootEvery = 0.2f, ShootRatio = Math.Abs(4) % 5 });
-        level.AddSingleShot(new HurterSpawnState { Position = 3, AtTime = 96, ShootEvery = 0.2f, ShootRatio = Math.Abs(4) % 5 });
-
-
-
-        level.AddCarrier(new HurterSpawnState { Position = -5, AtTime = 96, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-        level.AddCarrier(new HurterSpawnState { Position = 5, AtTime = 96, ShootEvery = 0.2f, ShootRatio = Math.Abs(2) % 5 });
-
-        level.AddClock(new ClockSpawnState { Position = 3, AtTime = 100, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 100, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-
-        level.AddEverynian(new SpawnState { Position = 0, AtTime = 100 });
-        level.AddClock(new ClockSpawnState { Position = 3, AtTime = 102, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-        level.AddClock(new ClockSpawnState { Position = -3, AtTime = 102, ShootRatio = Math.Abs(4) % 5, Clockwise = RandomHelper.Probability(0.5) });
-
         level.Finish();
+    }
+
+    static int AddEvent(Level level, Events @event, int timeOffset)
+    {
+        var t = timeOffset;
+        bool addEverynyan = RandomHelper.Probability(0.4);
+
+        switch (@event)
+        {
+            case Events.BoxedMegaclock:
+            {
+                t += 3;
+                var xOffset = RandomHelper.Random.Next(-4, 5);
+
+                level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
+                level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset - 1 });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = _ => -0.00015f });
+                level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset + 1 });
+                level.AddWall(new SpawnState { AtTime = t + 2, Position = xOffset });
+                return 8;
+            }
+
+            case Events.DrillerWave:
+                level.AddDrill(new SpawnState { AtTime = t, Position = 0 });
+                level.AddDrill(new SpawnState { AtTime = t + 1, Position = -7 });
+                level.AddDrill(new SpawnState { AtTime = t + 2, Position = 7 });
+                level.AddDrill(new SpawnState { AtTime = t + 3, Position = -7 });
+                level.AddDrill(new SpawnState { AtTime = t + 4, Position = 7 });
+                level.AddDrill(new SpawnState { AtTime = t + 5, Position = -7 });
+                level.AddDrill(new SpawnState { AtTime = t + 6, Position = 7 });
+                if (addEverynyan)
+                    level.AddEverynian(new SpawnState { AtTime = t + 3, Position = 0 });
+                return 0;
+
+            case Events.Corridor:
+            {
+                var width = RandomHelper.Random.Next(4, 8);
+                for (int i = 0; i <= 6; i++)
+                {
+                    float step = (i - 3) / 3.0f;
+
+                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t + i, Position = -width, ShootEvery = 1.5f, Angle = 90 + step * 25, TimeDelay = i / 6f });
+                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t + i, Position = width, ShootEvery = 1.5f, Angle = -90 - step * 25, TimeDelay = i / 6f });
+                }
+                if (addEverynyan)
+                    level.AddEverynian(new EverynianState { AtTime = t + 2, Position = 0 });
+                return 7;
+            }
+
+            case Events.EverynyanTriplet:
+                level.AddEverynian(new EverynianState { AtTime = t, Position = -1, ForcedPowerup = 0 });
+                level.AddEverynian(new EverynianState { AtTime = t, Position = -6, ForcedPowerup = 1 });
+                level.AddEverynian(new EverynianState { AtTime = t, Position = 5, ForcedPowerup = 2 });
+                return 5;
+
+            case Events.FullWall:
+                for (int i = -8; i < 9; i += 2)
+                    level.AddWall(new SpawnState { AtTime = t, Position = i });
+                return 3;
+
+            case Events.HomingPyramid:
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 0, Position = 0, ShootEvery = 1.0f, ShootPauseTime = 2, Homing = true });
+                return 4;
+
+            case Events.Triangle:
+            {
+                var xOffset = RandomHelper.Random.Next(-4, 5);
+
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 + xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = 5 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 + xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = -5 });
+                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = xOffset, ShootEvery = 1.0f, ShootPauseTime = 0 });
+                return 3;
+            }
+
+            case Events.Rail:
+            {
+                var xOffset = RandomHelper.Random.Next(-6, 7);
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = xOffset, ShootEvery = 3.0f, Angle = 5, Acceleration = s => Mathf.Clamp01(s - 0.75f) * 0.04f, Homing = true, Dangerous = true });
+                return 2;
+            }
+
+            case Events.Walled:
+                level.AddWall(new SpawnState { AtTime = t, Position = -3 });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.5f, RotateSpeed = 0.5f, Clockwise = true });
+                level.AddWall(new SpawnState { AtTime = t, Position = 3 });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.5f, RotateSpeed = 0.5f, Clockwise = false });
+                level.AddWall(new SpawnState { AtTime = t + 3, Position = -6 });
+                level.AddCarrier(new HurterSpawnState { AtTime = t + 4, Position = -6, ShootEvery = 3.0f });
+                level.AddWall(new SpawnState { AtTime = t + 3, Position = 6 });
+                level.AddCarrier(new HurterSpawnState { AtTime = t + 4, Position = 6, ShootEvery = 3.0f });
+                if (addEverynyan)
+                    level.AddEverynian(new SpawnState { AtTime = t + 3, Position = 0 });
+
+                return 6;
+        }
+
+        return 0;
+    }
+}
+
+enum Events
+{
+    HomingPyramid,
+    DrillerWave,
+    Walled,
+    BoxedMegaclock,
+    EverynyanTriplet,
+    Triangle,
+    Rail,
+    Corridor,
+    FullWall
+}
+
+
+static class EventExtensions
+{
+    public static int GetMinInterspawn(this Events @event)
+    {
+        switch (@event)
+        {
+            case Events.EverynyanTriplet: return 8;
+            case Events.FullWall: return 5;
+            default: return 1;
+        }
     }
 }

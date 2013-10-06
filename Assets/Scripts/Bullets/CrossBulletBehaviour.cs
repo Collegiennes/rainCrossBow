@@ -9,6 +9,7 @@ class CrossBulletBehaviour : Bullet
 
     static readonly float[] Power = { 6.0f, 5.5f, 6.0f };
 
+    Vector3 origin;
     float SinceAlive;
     Enemy LockedTo;
     float SinceVeryClose;
@@ -23,6 +24,8 @@ class CrossBulletBehaviour : Bullet
 
         if (PlayerTransform.gameObject.GetComponent<Shooting>().CrossLevel == 3)
             gameObject.FindChild("Sphere.2").renderer.material = ColorShifting.Materials["clr_Shift"];
+
+        origin = transform.position;
     }
 
     void TryLock()
@@ -31,12 +34,19 @@ class CrossBulletBehaviour : Bullet
         SinceVeryClose = 0;
 
         var enemy = enemies.Where(e => !e.Dead)
+            .Where(e => !(
+                Physics.OverlapSphere(e.transform.position + Vector3.up, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+                Physics.OverlapSphere(e.transform.position + Vector3.down, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+                Physics.OverlapSphere(e.transform.position + Vector3.left, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+                Physics.OverlapSphere(e.transform.position + Vector3.right, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0)) // reject if boxed in
             .OrderBy(e => (e.LockedOn).AsNumeric())
             .ThenBy(e => Vector3.Distance(e.transform.position, PlayerTransform.position))
             .ThenBy(e => Math.Sign(e.transform.position.y)).FirstOrDefault();
 
         if (enemy != null)
         {
+            //Debug.Log("Locked on to " + enemy.name);
+
             LockedTo = enemy;
             LockedTo.LockedOn = true;
         }

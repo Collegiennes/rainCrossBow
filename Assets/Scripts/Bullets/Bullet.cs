@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 abstract class Bullet : MonoBehaviour
@@ -63,16 +64,53 @@ abstract class Bullet : MonoBehaviour
         var distance = delta.magnitude;
         if (!Mathf.Approximately(distance, 0))
         {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(LastPosition, delta / distance, out hitInfo, distance, 1 << 8))
-                OnCollide(hitInfo.collider, hitInfo.point);
+            RaycastHit[] hitInfos;
+            hitInfos = Physics.RaycastAll(LastPosition, delta / distance, distance, 1 << 8);
+            if (hitInfos.Length > 0)
+            {
+                RaycastHit chosenHit;
+                if (hitInfos.Length > 1 && hitInfos.Any(x => x.collider.gameObject.GetComponent<WallBehaviour>() != null))
+                {
+                    //Debug.Log("Wall had precedence");
+                    chosenHit = hitInfos.First(x => x.collider.gameObject.GetComponent<WallBehaviour>() != null);
+                }
+                else
+                    chosenHit = hitInfos[0];
+
+                // test if boxed in, reject if so
+                if (!IsBoxedIn(chosenHit.collider))
+                    OnCollide(chosenHit.collider, chosenHit.point);
+            }
             else
             {
                 var colliders = Physics.OverlapSphere(transform.position, 0.25f, 1 << 8);
+                Collider chosenCollider;
                 if (colliders.Length != 0)
-                    OnCollide(colliders[0], transform.position);
+                {
+                    if (colliders.Length > 1 && colliders.Any(x => x.gameObject.GetComponent<WallBehaviour>() != null))
+                    {
+                        //Debug.Log("Wall had precedence");
+                        chosenCollider = colliders.First(x => x.gameObject.GetComponent<WallBehaviour>() != null);
+                    }
+                    else
+                        chosenCollider = colliders[0];
+
+                    if (!IsBoxedIn(chosenCollider))
+                        OnCollide(chosenCollider, transform.position);
+                }
             }
         }
+    }
+
+    bool IsBoxedIn(Collider c)
+    {
+        if (c.gameObject.name.StartsWith("nmy_every")) return false;
+
+        return
+            Physics.OverlapSphere(c.transform.position + Vector3.up, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+            Physics.OverlapSphere(c.transform.position + Vector3.down, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+            Physics.OverlapSphere(c.transform.position + Vector3.left, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0 &&
+            Physics.OverlapSphere(c.transform.position + Vector3.right, 0.25f, 1 << LayerMask.NameToLayer("Enemies")).Length != 0;
     }
 
     protected void AfterUpdate()

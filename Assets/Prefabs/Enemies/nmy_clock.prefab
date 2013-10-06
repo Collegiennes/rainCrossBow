@@ -631,7 +631,9 @@ MonoBehaviour:
   HurterTemplate: {fileID: 100004, guid: 1944b90c14881a94d87927b68002eca0, type: 2}
   Homing: 0
   ShootEverySeconds: 0
-  ShootPauseRatio: 0
+  ShootOffset: 0
+  ShootPauseTime: 0
+  Acceleration: 0
   ShootingVector: {x: 0, y: 0, z: 0}
   CustomMaterial: {fileID: 0}
 --- !u!1002 &11400005
@@ -665,7 +667,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1002 &13500001
 EditorExtensionImpl:

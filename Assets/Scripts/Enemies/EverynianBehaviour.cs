@@ -8,6 +8,7 @@ class EverynianBehaviour : Enemy
     public GameObject BirdTemplate;
 
     GameObject ToSpawn;
+    public int? ForcedId;
 
     void Start()
     {
@@ -19,7 +20,7 @@ class EverynianBehaviour : Enemy
 
         bow.SetActiveRecursively(false); cross.SetActiveRecursively(false); rain.SetActiveRecursively(false);
 
-        var enabledId = RandomHelper.Random.Next(0, 3);
+        var enabledId = ForcedId.HasValue ? ForcedId.Value : RandomHelper.Random.Next(0, 3);
         //var enabledId = 1;
         if (enabledId == 0) { bow.SetActiveRecursively(true); ToSpawn = bow; }
         if (enabledId == 1) { cross.SetActiveRecursively(true); ToSpawn = cross; }

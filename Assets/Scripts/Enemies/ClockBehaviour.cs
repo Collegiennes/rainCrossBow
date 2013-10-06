@@ -4,9 +4,9 @@ using UnityEngine;
 class ClockBehaviour : Enemy
 {
     const float Speed = 1.125f;
-    const float RotationSpeed = 0.01f;
 
     public bool Clockwise;
+    public float RotateSpeed;
 
     HurterSpawner Spawner;
     Animation[] Animations;
@@ -22,10 +22,9 @@ class ClockBehaviour : Enemy
         Spawner = GetComponent<HurterSpawner>();
         Animations = GetComponentsInChildren<Animation>();
 
-        if (!Clockwise)
-            foreach (var a in Animations)
-                foreach (AnimationState state in a)
-                    state.speed = -state.speed;
+        foreach (var a in Animations)
+            foreach (AnimationState state in a)
+                state.speed = state.speed * (Clockwise ? RotateSpeed : -RotateSpeed);
     }
 
     void FixedUpdate()
