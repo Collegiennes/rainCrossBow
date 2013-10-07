@@ -67,7 +67,10 @@ class CrossBulletBehaviour : Bullet
             var xploGo = (GameObject)Instantiate(Shooting.ExplosionTemplate);
             xploGo.transform.position = enemy.transform.position;
             xploGo.transform.rotation = Random.rotation;
-            xploGo.renderer.material = ColorShifting.Materials[ColorShifting.EnemyMaterials[enemy.GetType()]];
+            if (enemy is SingleShotBehaviour && (enemy as SingleShotBehaviour).invertColors)
+                xploGo.renderer.material = ColorShifting.Materials["clr_Red"];
+            else
+                xploGo.renderer.material = ColorShifting.Materials[ColorShifting.EnemyMaterials[enemy.GetType()]];
         }
 
         base.OnHit(shooting, enemy, contactPoint);

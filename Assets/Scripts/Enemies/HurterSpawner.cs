@@ -63,6 +63,10 @@ class HurterSpawner : MonoBehaviour
         hb.MinSpeed = 0.01f;
         hb.MaxSpeed = 0.25f;
 
+        if (GetComponent<SingleShotBehaviour>() != null)
+            if (GetComponent<SingleShotBehaviour>().invertColors)
+                go.GetComponentInChildren<TrailRenderer>().enabled = true;
+
         if (CustomMaterial == default(Material))
             go.FindChild("Sphere").renderer.material = ColorShifting.Materials[ColorShifting.EnemyMaterials[gameObject.GetComponent<Enemy>().GetType()]];
         else

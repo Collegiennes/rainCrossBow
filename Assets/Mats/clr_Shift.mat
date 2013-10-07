@@ -43,7 +43,7 @@ Material:
       data:
         first:
           name: _Emission
-        second: {r: .633570433, g: .229351625, b: .53398037, a: 1}
+        second: {r: .633570433, g: .598420858, b: .229351625, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

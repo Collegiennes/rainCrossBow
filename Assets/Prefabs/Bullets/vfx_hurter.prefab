@@ -51,6 +51,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
+  - 96: {fileID: 9600000}
   m_Layer: 11
   m_Name: vfx_hurter
   m_TagString: Hurter
@@ -96,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.459301, y: 16.7331924, z: -35.1455307}
+  m_LocalPosition: {x: 1.73281002, y: -7.86192513, z: -6.87041187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -167,6 +168,45 @@ MeshFilter:
 --- !u!1002 &3300003
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!96 &9600000
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: bfd922df3555d4a799898f761c8f714e, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_Time: .100000001
+  m_StartWidth: .5
+  m_EndWidth: 0
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4281150765
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4281150765
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4281150765
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4281150765
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +220,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dead: 0
   HomingAim: {x: 0, y: 0, z: 0}
+  MinSpeed: 0
+  MaxSpeed: 0
+  Velocity: 0
+  NoInertia: 0
 --- !u!1002 &11400001
 EditorExtensionImpl:
   serializedVersion: 6

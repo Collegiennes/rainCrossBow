@@ -86,6 +86,15 @@ class Level : MonoBehaviour
                 var go = (GameObject)Instantiate(CarrierTemplate, new Vector3(spawn.Position, 10, 0), Quaternion.Euler(0, 90, 0));
                 CarrierSpawns.RemoveAt(i--);
 
+                if (spawn is WiggleSpawnState)
+                {
+                    var cb = go.GetComponent<CarrierBehaviour>();
+                    var wss = spawn as WiggleSpawnState;
+                    cb.WiggleOffset = wss.WiggleDelay;
+                    cb.WiggleSign = wss.WiggleSign;
+                    cb.WiggleSpeed = wss.WiggleSpeed;
+                }
+
                 foreach (var hs in go.GetComponents<HurterSpawner>())
                 {
                     hs.ShootEverySeconds = spawn.ShootEvery;
@@ -230,4 +239,11 @@ public class SingleShotSpawnState : HurterSpawnState
     public bool Homing;
     public float Angle;
     public bool Dangerous;
+}
+
+public class WiggleSpawnState : HurterSpawnState
+{
+    public float WiggleSpeed = 1;
+    public int WiggleSign = 1;
+    public float WiggleDelay;
 }

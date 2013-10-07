@@ -9,7 +9,7 @@ class ColorShifting : MonoBehaviour
     public static Dictionary<Type, string> EnemyMaterials = new Dictionary<Type, string>
     {
         { typeof(CarrierBehaviour), "clr_Yellow" },
-        //{ typeof(BombBehaviour), "clr_Red" },
+//        { typeof(BombBehaviour), "clr_Red" },
         { typeof(DrillerBehaviour), "clr_Blurple" },
         { typeof(WallBehaviour), "clr_Cyan" },
         { typeof(ClockBehaviour), "clr_GreenFluo" },
