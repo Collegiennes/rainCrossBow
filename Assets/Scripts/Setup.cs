@@ -187,7 +187,7 @@ class Setup : MonoBehaviour
                 {
                     float step = (j - ((count - 1) / 2.0f)) / ((count - 1) / 2.0f);
                     int xOffset = (int)Math.Round(step * (count * 1.5f));
-                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = -xOffset, ShootEvery = 3.0f, Acceleration = s => Mathf.Clamp01(s - 0.75f) * 0.04f, Homing = true, Dangerous = true, TimeDelay = step * 1.5f });
+                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = -xOffset, ShootEvery = 3.0f, Acceleration = s => Mathf.Clamp01(s - 0.75f) * 0.04f, Homing = true, Dangerous = true });
                     
                     if (walled)
                         level.AddWall(new SpawnState { AtTime = t, Position = xOffset });

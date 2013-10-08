@@ -27,8 +27,8 @@ class BackgroundGenerator : MonoBehaviour
     {
         TotalScroll += ScrollSpeed;
 
-        TopBackground.transform.position += Vector3.down * ScrollSpeed;
-        BottomBackground.transform.position += Vector3.down * ScrollSpeed;
+        TopBackground.transform.position += Vector3.down * ScrollSpeed * Level.ScrollingSpeed;
+        BottomBackground.transform.position += Vector3.down * ScrollSpeed * Level.ScrollingSpeed;
 
         if (TotalScroll > MaxScroll)
         {

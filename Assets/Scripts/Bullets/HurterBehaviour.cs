@@ -32,7 +32,7 @@ class HurterBehaviour : Bullet
 
         transform.position += HomingAim * Velocity;
         if (!NoInertia)
-            transform.position += 1.125f * Vector3.down * Time.deltaTime;
+            transform.position += Level.ScrollingSpeed * Vector3.down * Time.deltaTime;
 
         SinceAlive += Time.deltaTime;
 

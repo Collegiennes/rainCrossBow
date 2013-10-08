@@ -173,6 +173,7 @@ GameObject:
   - 15: {fileID: 290}
   - 12: {fileID: 289}
   - 26: {fileID: 398}
+  - 114: {fileID: 39}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -633,6 +634,17 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+--- !u!114 &39
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 11}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e12eeb191fcf5448a97e3be1c3f45af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &45
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,7 +2185,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.2146006, y: -5.93723488, z: -.899078369}
+  m_LocalPosition: {x: 10.9918442, y: -5.93723488, z: -.899078369}
   m_LocalScale: {x: .0870194808, y: .0870194808, z: .0870194808}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2242,7 +2254,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 11}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15.9923744, z: 0}
+  m_LocalPosition: {x: 0, y: 27.9766083, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3694,13 +3706,13 @@ EllipsoidParticleEmitter:
   m_Emit: 1
   minSize: .100000001
   maxSize: .100000001
-  minEnergy: 3
-  maxEnergy: 3
+  minEnergy: 2.5
+  maxEnergy: 2.5
   minEmission: 50
   maxEmission: 50
   worldVelocity: {x: 0, y: 0, z: 0}
-  localVelocity: {x: 0, y: -45, z: 0}
-  rndVelocity: {x: 0, y: 0, z: 0}
+  localVelocity: {x: 0, y: -25, z: 0}
+  rndVelocity: {x: 0, y: 25, z: 0}
   emitterVelocityScale: .0500000007
   tangentVelocity: {x: 0, y: 0, z: 0}
   angularVelocity: 0
@@ -3709,7 +3721,7 @@ EllipsoidParticleEmitter:
   Simulate in Worldspace?: 1
   m_OneShot: 0
   m_Ellipsoid: {x: 1, y: 1, z: 1}
-  m_MinEmitterRange: 300
+  m_MinEmitterRange: 1000
 --- !u!20 &291
 Camera:
   m_ObjectHideFlags: 0
@@ -5482,7 +5494,7 @@ ParticleRenderer:
   serializedVersion: 2
   m_CameraVelocityScale: 1
   m_StretchParticles: 3
-  m_LengthScale: 50
+  m_LengthScale: 100
   m_VelocityScale: 0
   m_MaxParticleSize: .25
   UV Animation:

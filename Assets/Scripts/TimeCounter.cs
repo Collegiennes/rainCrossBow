@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 class TimeCounter : MonoBehaviour
@@ -5,6 +6,8 @@ class TimeCounter : MonoBehaviour
     Flyby flyBy;
 
     float personalBest;
+
+    readonly StringBuilder builder = new StringBuilder();
 
     void Start()
     {
@@ -16,12 +19,19 @@ class TimeCounter : MonoBehaviour
     {
         if (Setup.ActiveLevel != null)
         {
-            GetComponent<TextMesh>().text = string.Format("SURVIVED\n{0:0.00} SECONDS", Setup.ActiveLevel.SinceAlive);
-            personalBest = Mathf.Max(Setup.ActiveLevel.SinceAlive, personalBest);
+            builder.Length = 0;
 
-            GetComponent<TextMesh>().text += string.Format("\n\nPERSONAL BEST : {0:0.00}", personalBest);
+            builder.AppendFormat("SURVIVED\n{0:0.00} SECONDS", Setup.ActiveLevel.SinceAlive);
+            personalBest = Mathf.Max(Setup.ActiveLevel.SinceAlive, personalBest);
+            builder.AppendFormat("\n\nPERSONAL BEST : {0:0.00}", personalBest);
         }
         if (flyBy.enabled && personalBest > 0)
-            GetComponent<TextMesh>().text = string.Format("\n\n\nPERSONAL BEST : {0:0.00}", personalBest);
+        {
+            builder.Length = 0;
+
+            builder.AppendFormat("\n\n\nPERSONAL BEST : {0:0.00}", personalBest);
+        }
+
+        GetComponent<TextMesh>().text = builder.ToString();
     }
 }

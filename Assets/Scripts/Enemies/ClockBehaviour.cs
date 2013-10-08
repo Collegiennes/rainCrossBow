@@ -3,8 +3,6 @@ using UnityEngine;
 
 class ClockBehaviour : Enemy
 {
-    const float Speed = 1.125f;
-
     public bool Clockwise;
     public float RotateSpeed;
 
@@ -31,7 +29,7 @@ class ClockBehaviour : Enemy
     {
         if (Dead) return;
 
-        transform.position -= Vector3.up * Time.deltaTime * Speed;
+        transform.position -= Vector3.up * Time.deltaTime * Level.ScrollingSpeed;
         Spawner.ShootingVector = Animations[0].transform.rotation * Vector3.up;
 
         AfterUpdate();

@@ -23,6 +23,7 @@ class Flyby : MonoBehaviour
         AudioSource.PlayClipAtPoint(OhMyGah, transform.position);
         SinceStarted = 0;
         enabled = true;
+        Level.ScrollingSpeed = 0.85f;
 
         FixedUpdate();
     }

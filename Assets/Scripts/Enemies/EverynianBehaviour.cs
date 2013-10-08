@@ -3,8 +3,6 @@ using UnityEngine;
 
 class EverynianBehaviour : Enemy
 {
-    const float Speed = 1.125f;
-
     public GameObject BirdTemplate;
 
     GameObject ToSpawn;
@@ -47,7 +45,7 @@ class EverynianBehaviour : Enemy
     {
         if (Dead) return;
 
-        transform.position -= Vector3.up * Time.deltaTime * Speed;
+        transform.position -= Vector3.up * Time.deltaTime * Level.ScrollingSpeed;
 
         AfterUpdate();
     }

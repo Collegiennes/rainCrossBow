@@ -3,8 +3,6 @@ using UnityEngine;
 
 class SingleShotBehaviour : Enemy
 {
-    const float Speed = 1.125f;
-
     HurterSpawner hs;
     public bool invertColors = false;
 
@@ -43,7 +41,7 @@ class SingleShotBehaviour : Enemy
     {
         if (Dead) return;
 
-        transform.position -= Vector3.up * Time.deltaTime * Speed;
+        transform.position -= Vector3.up * Time.deltaTime * Level.ScrollingSpeed;
 
         if (hs.Homing)
         {

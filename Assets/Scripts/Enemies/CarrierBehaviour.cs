@@ -3,8 +3,6 @@ using UnityEngine;
 
 class CarrierBehaviour : Enemy
 {
-    const float Speed = 1.125f;
-
     Vector3 center;
     float WiggleStep;
     public float WiggleSpeed = 1.0f;
@@ -35,7 +33,7 @@ class CarrierBehaviour : Enemy
     {
         if (Dead) return;
 
-        center -= Vector3.up * Time.deltaTime * Speed;
+        center -= Vector3.up * Time.deltaTime * Level.ScrollingSpeed;
 
         WiggleStep += WiggleSpeed * Time.deltaTime * WiggleSign;
         transform.position = center + new Vector3(0.5f, 0, 0) * Mathf.Sin(WiggleStep * Mathf.PI);

@@ -633,7 +633,8 @@ MonoBehaviour:
   ShootEverySeconds: 0
   ShootOffset: 0
   ShootPauseTime: 0
-  Acceleration: 0
+  BaseAngle: 0
+  SinceAlive: 0
   ShootingVector: {x: 0, y: 0, z: 0}
   CustomMaterial: {fileID: 0}
 --- !u!1002 &11400005
@@ -654,6 +655,7 @@ MonoBehaviour:
   Dead: 0
   LockedOn: 0
   Clockwise: 0
+  RotateSpeed: 0
 --- !u!1002 &11400007
 EditorExtensionImpl:
   serializedVersion: 6
@@ -667,7 +669,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: .899999976
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1002 &13500001
 EditorExtensionImpl:

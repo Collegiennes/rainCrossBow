@@ -20,6 +20,8 @@ class Level : MonoBehaviour
     public readonly List<ClockSpawnState> ClockSpawns = new List<ClockSpawnState>();
     //public readonly List<SpawnState> BombSpawns = new List<SpawnState>();
 
+    public static float ScrollingSpeed;
+
     public float SinceAlive;
 
     public void AddDrill(SpawnState spawnState)
@@ -61,7 +63,8 @@ class Level : MonoBehaviour
 
     void FixedUpdate()
     {
-        SinceAlive += Time.deltaTime;
+        ScrollingSpeed += Time.deltaTime / 120.0f;
+        SinceAlive += Time.deltaTime * ScrollingSpeed / 1.25f;
 
         thisSpawnedAt.Clear();
 

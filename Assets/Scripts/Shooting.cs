@@ -73,7 +73,7 @@ class Shooting : MonoBehaviour
         // Attacks
         bool rainShot = gamepadInput.RightTrigger.Value > 0.1 || gamepadInput.RightShoulder.State.IsDown() || Keyboard.GetKeyState(KeyCode.A).State.IsDown();
         bool crossShot = gamepadInput.LeftTrigger.Value > 0.1 || gamepadInput.LeftShoulder.State.IsDown() || Keyboard.GetKeyState(KeyCode.S).State.IsDown();
-        bool bowShot = gamepadInput.A.State.IsDown() || gamepadInput.X.State.IsDown() || Keyboard.GetKeyState(KeyCode.D).State.IsDown();
+        bool bowShot = gamepadInput.A.State.IsDown() || gamepadInput.X.State.IsDown() || gamepadInput.B.State.IsDown() || gamepadInput.Y.State.IsDown()  || Keyboard.GetKeyState(KeyCode.D).State.IsDown();
 
         if (!rainShot) RainSine = 0;
 

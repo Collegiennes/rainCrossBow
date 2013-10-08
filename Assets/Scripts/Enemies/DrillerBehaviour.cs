@@ -28,9 +28,9 @@ class DrillerBehaviour : Enemy
         if (xDistance < 1) xDistance = 1;
         //xDistance = (float)Math.Pow(xDistance, 1 / 2f);
 
-        Velocity += -Vector3.up * Time.deltaTime / xDistance * MoveSpeed;
+        Velocity += -Vector3.up * Time.deltaTime / xDistance * MoveSpeed * Level.ScrollingSpeed;
         if (PlayerTransform.position.y < transform.position.y)
-            Velocity += Vector3.right * Math.Sign(PlayerTransform.position.x - transform.position.x) * Time.deltaTime * StrafeSpeed * strafeFactor;
+            Velocity += Vector3.right * Math.Sign(PlayerTransform.position.x - transform.position.x) * Time.deltaTime * StrafeSpeed * Level.ScrollingSpeed * strafeFactor;
         Velocity *= 0.9425f;
 
         transform.position += Velocity;
