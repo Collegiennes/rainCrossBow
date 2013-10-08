@@ -13,6 +13,7 @@ class HurterSpawner : MonoBehaviour
 
     public float SinceAlive;
     int SinceShot;
+    bool isDangerous;
 
     public Vector3 ShootingVector;
     public Material CustomMaterial;
@@ -25,13 +26,16 @@ class HurterSpawner : MonoBehaviour
         PlayerTransform = GameObject.Find("Player").transform;
         Enemy = GetComponent<Enemy>();
         SinceShot = ShootPauseTime - ShootOffset;
+
+        isDangerous = GetComponent<SingleShotBehaviour>() != null &&
+                      GetComponent<SingleShotBehaviour>().invertColors;
     }
 
     void FixedUpdate()
     {
         if (Enemy.Dead) return;
 
-        SinceAlive += Time.deltaTime;
+        SinceAlive += Time.deltaTime * Level.ScrollingSpeed;
 
         if (SinceAlive >= ShootEverySeconds)
         {
@@ -59,7 +63,9 @@ class HurterSpawner : MonoBehaviour
             hb.HomingAim = Vector3.Normalize(PlayerTransform.transform.position - transform.position);
 
         hb.NoInertia = Homing;
-        hb.Velocity = 0.04f;
+        hb.Velocity = 0.0375f * (Homing ? 1 + 0.5f * Level.ScrollingSpeed : 1);
+        if (isDangerous)
+            hb.Velocity = 0.04f;
         hb.MinSpeed = 0.01f;
         hb.MaxSpeed = 0.25f;
 

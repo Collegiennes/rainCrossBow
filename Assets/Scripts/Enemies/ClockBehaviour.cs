@@ -22,7 +22,7 @@ class ClockBehaviour : Enemy
 
         foreach (var a in Animations)
             foreach (AnimationState state in a)
-                state.speed = state.speed * (Clockwise ? RotateSpeed : -RotateSpeed);
+                state.speed = state.speed * (Clockwise ? RotateSpeed : -RotateSpeed) * Level.ScrollingSpeed;
     }
 
     void FixedUpdate()

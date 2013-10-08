@@ -21,8 +21,8 @@ class TimeCounter : MonoBehaviour
         {
             builder.Length = 0;
 
-            builder.AppendFormat("SURVIVED\n{0:0.00} SECONDS", Setup.ActiveLevel.SinceAlive);
-            personalBest = Mathf.Max(Setup.ActiveLevel.SinceAlive, personalBest);
+            builder.AppendFormat("SURVIVED\n{0:0.00} SECONDS", Setup.ActiveLevel.SinceRoundStarted);
+            personalBest = Mathf.Max(Setup.ActiveLevel.SinceRoundStarted, personalBest);
             builder.AppendFormat("\n\nPERSONAL BEST : {0:0.00}", personalBest);
         }
         if (flyBy.enabled && personalBest > 0)

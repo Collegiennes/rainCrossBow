@@ -21,7 +21,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_UseDX11: 0
+  m_UseDX11: 1
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   displayResolutionDialog: 1
@@ -34,7 +34,7 @@ PlayerSettings:
   use24BitDepthBuffer: 0
   defaultIsFullScreen: 1
   defaultIsNativeResolution: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   Override IPod Music: 0
   Prepare IOS For Recording: 0

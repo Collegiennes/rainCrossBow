@@ -82,9 +82,7 @@ class Setup : MonoBehaviour
 
     static int GetInterEventGap(int eventId)
     {
-        if (eventId < 10) return 2;
-        if (eventId < 20) return 1;
-        return 0;
+        return 1;
     }
 
     static int AddEvent(Level level, Events @event, int timeOffset)
@@ -152,11 +150,11 @@ class Setup : MonoBehaviour
             case Events.HomingPyramid:
                 level.AddWall(new SpawnState { AtTime = t + 2, Position = 0 });
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 1.0f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 0, Position = 0, ShootEvery = 1.0f, ShootPauseTime = 2, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 0, Position = 0, ShootEvery = 0.5f, ShootPauseTime = 2, Homing = true });
                 return 4;
 
             case Events.DualTriangles:
@@ -165,13 +163,13 @@ class Setup : MonoBehaviour
 
                 level.AddWall(new SpawnState { AtTime = t, Position = 0 });
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 + xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = 5 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 + xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = -5 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 + xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = 5 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 + xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = -5 });
                 level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = xOffset, ShootEvery = 1.0f, ShootPauseTime = 0 });
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 - xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = 5, TimeDelay = 0.5f });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 - xOffset, ShootEvery = 1.0f, ShootPauseTime = 1, Angle = -5, TimeDelay = 0.5f });
-                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = -xOffset, ShootEvery = 1.0f, ShootPauseTime = 0, TimeDelay = 0.5f });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 - xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = 5, TimeDelay = 0.5f });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 - xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = -5, TimeDelay = 0.5f });
+                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = -xOffset, ShootEvery = 1.5f, ShootPauseTime = 0, TimeDelay = 0.5f });
 
                 if (addEverynyan)
                     level.AddEverynian(new SpawnState { AtTime = t + 2, Position = 0 });

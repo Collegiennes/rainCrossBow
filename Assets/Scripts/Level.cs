@@ -23,6 +23,7 @@ class Level : MonoBehaviour
     public static float ScrollingSpeed;
 
     public float SinceAlive;
+    public float SinceRoundStarted;
 
     public void AddDrill(SpawnState spawnState)
     {
@@ -65,6 +66,7 @@ class Level : MonoBehaviour
     {
         ScrollingSpeed += Time.deltaTime / 120.0f;
         SinceAlive += Time.deltaTime * ScrollingSpeed / 1.25f;
+        SinceRoundStarted += Time.deltaTime;
 
         thisSpawnedAt.Clear();
 
