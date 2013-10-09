@@ -90,7 +90,7 @@ public class GamepadState
                                   gamepadState.DPad.Right == ButtonState.Pressed, elapsed);
 
             // Deadzone that shit
-            const float DeadZone = 0.2f;
+            const float DeadZone = 0.1f;
 
             var left = new Vector2(gamepadState.ThumbSticks.Left.X, gamepadState.ThumbSticks.Left.Y);
             var right = new Vector2(gamepadState.ThumbSticks.Right.X, gamepadState.ThumbSticks.Right.Y);
@@ -134,7 +134,7 @@ public class GamepadState
                                   Input.GetButton(playerPrefix + " DPadRight"), elapsed);
 
             // Deadzone that shit
-            const float DeadZone = 0.2f;
+            const float DeadZone = 0.1f;
 
             var left = new Vector2(Input.GetAxisRaw(playerPrefix + " LeftStick X"), Input.GetAxisRaw(playerPrefix + " LeftStick Y") * -1);
             var right = new Vector2(Input.GetAxisRaw(playerPrefix + " RightStick X"), Input.GetAxisRaw(playerPrefix + " RightStick Y") * -1);

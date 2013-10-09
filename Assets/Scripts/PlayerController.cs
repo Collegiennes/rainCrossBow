@@ -29,11 +29,15 @@ class PlayerController : MonoBehaviour
 
         var gamepadInput = GamepadsManager.Instance.Any;
 
-        var horizAxis = Mathf.Clamp(gamepadInput.LeftStick.SquaredPosition.x +
+        var lsP = gamepadInput.LeftStick.Position;
+        if (lsP.sqrMagnitude != 0)
+            lsP = Vector2.Lerp(lsP, lsP.normalized, lsP.sqrMagnitude);
+
+        var horizAxis = Mathf.Clamp(lsP.x +
                 (gamepadInput.DPad.Left.State.IsDown() || Keyboard.GetKeyState(KeyCode.LeftArrow).State.IsDown() ? -1 : 0) +
                 (gamepadInput.DPad.Right.State.IsDown() || Keyboard.GetKeyState(KeyCode.RightArrow).State.IsDown() ? 1 : 0), -1, 1);
 
-        var vertAxis = Mathf.Clamp(gamepadInput.LeftStick.SquaredPosition.y +
+        var vertAxis = Mathf.Clamp(lsP.y +
                 (gamepadInput.DPad.Down.State.IsDown() || Keyboard.GetKeyState(KeyCode.DownArrow).State.IsDown() ? -1 : 0) +
                 (gamepadInput.DPad.Up.State.IsDown() || Keyboard.GetKeyState(KeyCode.UpArrow).State.IsDown() ? 1 : 0), -1, 1);
 

@@ -55,11 +55,9 @@ class Setup : MonoBehaviour
         var m = new Dictionary<Events, int>();
 
         // start with a drill wave 'cause it's fun
-        //AddEvent(level, Events.DrillerWave, 0);
-        AddEvent(level, Events.SoloEverynian, 0);
+        AddEvent(level, Events.DrillerWave, 0);
         m.Add(Events.DrillerWave, 0);
 
-        /*
         var timeOffset = 0;
         for (int i = 0; i < 100; i++)
         {
@@ -78,7 +76,6 @@ class Setup : MonoBehaviour
 
             m.Add(randomEvent, 0);
         }
-        */
 
         level.Finish();
     }
