@@ -21,6 +21,9 @@ class RainBulletBehaviour : Bullet
 
     protected override void OnHit(Shooting shooting, Enemy enemy, Vector3 contactPoint)
     {
+        if (enemy.Health <= 0)
+            return;
+
         var level = shooting.RainLevel;
         enemy.Health -= Power[Math.Min(level - 1, 2)];
 

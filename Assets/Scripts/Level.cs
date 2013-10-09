@@ -60,7 +60,7 @@ class Level : MonoBehaviour
         ClockSpawns.Sort((a, b) => a.AtTime.CompareTo(b.AtTime));
     }
 
-    readonly HashSet<int> thisSpawnedAt = new HashSet<int>(); 
+    readonly HashSet<int> thisSpawnedAt = new HashSet<int>();
 
     void FixedUpdate()
     {
@@ -224,7 +224,7 @@ public class HurterSpawnState : SpawnState
     public float ShootEvery;
     public int ShootPauseTime;
     public int ShootPauseOffset;
-    public Func<float, float> Acceleration = _ => 0;
+    public Func<float, float, float> Acceleration = (_, __) => 0;
     public float TimeDelay = 1;
 }
 

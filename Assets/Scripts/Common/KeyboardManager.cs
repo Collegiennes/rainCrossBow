@@ -47,7 +47,7 @@ public class KeyboardManager : MonoBehaviour, IKeyboard
         return state;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         var dt = Time.deltaTime;
 

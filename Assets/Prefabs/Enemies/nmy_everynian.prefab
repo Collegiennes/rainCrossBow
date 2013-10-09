@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ef0c5e767941e4398fed0021b3b905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 25
+  Health: 20
   Dead: 0
   LockedOn: 0
   BirdTemplate: {fileID: 100000, guid: 1e7232314496544c29d9c831c115daf4, type: 2}

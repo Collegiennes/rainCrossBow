@@ -6,7 +6,7 @@ class HurterBehaviour : Bullet
     [HideInInspector]
     public Vector3 HomingAim;
     [HideInInspector]
-    public Func<float, float> Acceleration;
+    public Func<float, float, float> Acceleration;
     [HideInInspector]
     public float MinSpeed;
     [HideInInspector]
@@ -14,6 +14,7 @@ class HurterBehaviour : Bullet
 
     public float Velocity;
     public bool NoInertia;
+    public float SpawnTime;
 
     float SinceAlive;
 
@@ -27,7 +28,7 @@ class HurterBehaviour : Bullet
     {
         if (Dead) return;
 
-        Velocity += Acceleration(SinceAlive);
+        Velocity += Acceleration(SinceAlive, SpawnTime);
         var newVelocity = Velocity * Level.ScrollingSpeed;
         newVelocity = Mathf.Clamp(newVelocity, MinSpeed * Level.ScrollingSpeed, MaxSpeed * Level.ScrollingSpeed);
 

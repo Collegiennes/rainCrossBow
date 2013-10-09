@@ -55,9 +55,11 @@ class Setup : MonoBehaviour
         var m = new Dictionary<Events, int>();
 
         // start with a drill wave 'cause it's fun
-        AddEvent(level, Events.DrillerWave, 0);
+        //AddEvent(level, Events.DrillerWave, 0);
+        AddEvent(level, Events.SoloEverynian, 0);
         m.Add(Events.DrillerWave, 0);
 
+        /*
         var timeOffset = 0;
         for (int i = 0; i < 100; i++)
         {
@@ -76,6 +78,7 @@ class Setup : MonoBehaviour
 
             m.Add(randomEvent, 0);
         }
+        */
 
         level.Finish();
     }
@@ -102,7 +105,7 @@ class Setup : MonoBehaviour
 
                 level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset - 1 });
-                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = _ => -0.00015f });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = (s, st) => -0.0000525f - Mathf.Pow(st, 2.0f) * 0.000001f });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset + 1 });
                 level.AddWall(new SpawnState { AtTime = t + 2, Position = xOffset });
                 return 4;
@@ -150,11 +153,11 @@ class Setup : MonoBehaviour
             case Events.HomingPyramid:
                 level.AddWall(new SpawnState { AtTime = t + 2, Position = 0 });
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.5f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 0, Position = 0, ShootEvery = 0.5f, ShootPauseTime = 2, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.625f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.625f, ShootPauseTime = 2, ShootPauseOffset = 0, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.625f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.625f, ShootPauseTime = 2, ShootPauseOffset = -1, Homing = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 0, Position = 0, ShootEvery = 0.625f, ShootPauseTime = 2, Homing = true });
                 return 4;
 
             case Events.DualTriangles:
@@ -185,7 +188,7 @@ class Setup : MonoBehaviour
                 {
                     float step = (j - ((count - 1) / 2.0f)) / ((count - 1) / 2.0f);
                     int xOffset = (int)Math.Round(step * (count * 1.5f));
-                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = -xOffset, ShootEvery = 3.0f, Acceleration = s => Mathf.Clamp01(s - 0.75f) * 0.04f, Homing = true, Dangerous = true });
+                    level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = -xOffset, ShootEvery = 3.0f, Acceleration = (s, st) => Mathf.Clamp01(s - 0.75f) * 0.05f, Homing = true, Dangerous = true });
                     
                     if (walled)
                         level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
@@ -196,7 +199,7 @@ class Setup : MonoBehaviour
             case Events.Rail:
             {
                 var xOffset = RandomHelper.Random.Next(-6, 7);
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = xOffset, ShootEvery = 3.0f, Angle = 5, Acceleration = s => Mathf.Clamp01(s - 0.75f) * 0.04f, Homing = true, Dangerous = true });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t+1, Position = xOffset, ShootEvery = 3.0f, Angle = 5, Acceleration = (s, st) => Mathf.Clamp01(s - 0.75f) * 0.05f, Homing = true, Dangerous = true });
                 if (RandomHelper.Probability(0.5))
                     level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
                 return 2;
@@ -268,7 +271,7 @@ static class EventExtensions
         {
             //case Events.EverynyanTriplet: return 8;
             case Events.FullWall: return 5;
-            default: return 1;
+            default: return 2;
         }
     }
 

@@ -6,7 +6,7 @@ abstract class Bullet : MonoBehaviour
 {
     const float ScreenSize = 11;
 
-    readonly HashSet<GameObject> AlreadyHit = new HashSet<GameObject>();
+    protected readonly HashSet<GameObject> AlreadyHit = new HashSet<GameObject>();
     protected Vector3 LastPosition;
 
     [HideInInspector]

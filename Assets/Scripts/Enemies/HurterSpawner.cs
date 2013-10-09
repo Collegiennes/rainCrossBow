@@ -8,10 +8,11 @@ class HurterSpawner : MonoBehaviour
     public float ShootEverySeconds;
     public int ShootOffset;
     public int ShootPauseTime;
-    public Func<float, float> Acceleration;
+    public Func<float, float, float> Acceleration;
     public float BaseAngle;
 
     public float SinceAlive;
+    float SinceAliveTotal;
     int SinceShot;
     bool isDangerous;
 
@@ -35,6 +36,7 @@ class HurterSpawner : MonoBehaviour
     {
         if (Enemy.Dead) return;
 
+        SinceAliveTotal += Time.deltaTime * Level.ScrollingSpeed;
         SinceAlive += Time.deltaTime * Level.ScrollingSpeed;
 
         if (SinceAlive >= ShootEverySeconds)
@@ -66,8 +68,11 @@ class HurterSpawner : MonoBehaviour
         hb.Velocity = 0.0375f * (Homing ? 1 + 0.5f * Level.ScrollingSpeed : 1);
         if (isDangerous)
             hb.Velocity = 0.04f;
-        hb.MinSpeed = 0.01f;
-        hb.MaxSpeed = 0.25f;
+        hb.MinSpeed = 0;
+        hb.MaxSpeed = 0.35f;
+        hb.SpawnTime = SinceAliveTotal;
+
+        //Debug.Log("Spawn Time : " + hb.SpawnTime);
 
         if (GetComponent<SingleShotBehaviour>() != null)
             if (GetComponent<SingleShotBehaviour>().invertColors)

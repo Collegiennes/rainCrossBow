@@ -7,7 +7,7 @@ class BowBulletBehaviour : Bullet
 {
     const float Speed = 1;
 
-    static readonly float[] Power = { 25, 35, 70 };
+    static readonly float[] Power = { 200, 300, 500 };
 
     public bool PlayerShot;
     public GameObject CharginTemplate;
@@ -39,7 +39,7 @@ class BowBulletBehaviour : Bullet
     protected override void OnHit(Shooting shooting, Enemy enemy, Vector3 contactPoint)
     {
         var level = shooting.BowLevel;
-        enemy.Health -= Power[Math.Min(level - 1, 2)];
+        enemy.Health -= Power[Math.Min(level - 1, 2)] * Time.deltaTime;
 
         base.OnHit(shooting, enemy, contactPoint);
     }
@@ -75,13 +75,18 @@ class BowBulletBehaviour : Bullet
             if (hitInfo.collider.tag != "Enemy") return;
 
             OnCollide(hitInfo.collider, hitInfo.point);
+            AlreadyHit.Remove(hitInfo.collider.gameObject);
+
             GetComponentInChildren<Stroboscope>().enabled = true;
 
             var collidee = hitInfo.collider.transform;
             var lastCollidePosition = collidee.position;
 
             var cp = ClosestPointOnRay(ray, lastCollidePosition - new Vector3(0, 0.4f, 0));
-            var mat = ColorShifting.Materials[ColorShifting.EnemyMaterials[hitInfo.collider.GetComponent<Enemy>().GetType()]];
+            var enemy = hitInfo.collider.GetComponent<Enemy>();
+            var mat = ColorShifting.Materials[ColorShifting.EnemyMaterials[enemy.GetType()]];
+            if (enemy is SingleShotBehaviour && (enemy as SingleShotBehaviour).invertColors)
+                mat = ColorShifting.Materials["clr_Red"];
 
             var go = (GameObject)Instantiate(CharginTemplate, cp, Quaternion.identity);
             go.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
