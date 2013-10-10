@@ -102,7 +102,7 @@ class Setup : MonoBehaviour
 
                 level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset - 1 });
-                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = (s, st) => -0.0000525f - Mathf.Pow(st, 2.0f) * 0.000001f });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = (s, st) => -0.000075f - Mathf.Pow(st, 2.0f) * 0.00000275f });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset + 1 });
                 level.AddWall(new SpawnState { AtTime = t + 2, Position = xOffset });
                 return 4;

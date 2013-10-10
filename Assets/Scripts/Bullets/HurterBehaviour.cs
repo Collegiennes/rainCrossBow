@@ -28,7 +28,8 @@ class HurterBehaviour : Bullet
     {
         if (Dead) return;
 
-        Velocity += Acceleration(SinceAlive, SpawnTime);
+        var acc = Acceleration(SinceAlive, SpawnTime);
+        Velocity += acc * Mathf.Pow(Level.ScrollingSpeed, 2);
         var newVelocity = Velocity * Level.ScrollingSpeed;
         newVelocity = Mathf.Clamp(newVelocity, MinSpeed * Level.ScrollingSpeed, MaxSpeed * Level.ScrollingSpeed);
 

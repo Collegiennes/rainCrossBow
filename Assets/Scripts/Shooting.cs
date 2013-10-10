@@ -3,7 +3,7 @@ using UnityEngine;
 
 class Shooting : MonoBehaviour
 {
-    static readonly float[] EnergyRequirements = { 4, 75, 45 };
+    static readonly float[] EnergyRequirements = { 4, 70, 50 };
 
     public static GameObject HitTemplate;
     public static GameObject ExplosionTemplate;
@@ -22,6 +22,7 @@ class Shooting : MonoBehaviour
 
     float RainSine;
     float SinceBow;
+    bool ShootingBow;
 
     PlayerController Controller;
 
@@ -46,6 +47,8 @@ class Shooting : MonoBehaviour
         BowHead.SetActiveRecursively(false);
         CrossHead.SetActiveRecursively(false);
         CharginLazor.SetActiveRecursively(false);
+
+        ShootingBow = false;
     }
 
     void FixedUpdate()
@@ -95,12 +98,16 @@ class Shooting : MonoBehaviour
         CharginLazor.SetActiveRecursively(bowShot && SinceBow > 0.25f);
         SinceBow += Time.deltaTime;
 
+        bowShot &= !ShootingBow;
+
         if (energySpent == 0) energySpent = 1;
         //energySpent = (float) Math.Pow(energySpent, 1.25f); // TODO : Good idea?
 
         EnergyLeft[0] -= 1f / energySpent;
         if (bowShot)
-            EnergyLeft[1] -= 1f / energySpent;
+        {
+            EnergyLeft[1] -= (1f / energySpent) * Mathf.Lerp(1, 2, Mathf.Pow((BowLevel - 1) / 2.0f, 2.0f));
+        }
         EnergyLeft[2] -= 1f / energySpent;
 
         if (rainShot && EnergyLeft[0] <= 0)
@@ -143,7 +150,8 @@ class Shooting : MonoBehaviour
             var go = (GameObject) Instantiate(BowBullet, transform.position, Quaternion.AngleAxis(90, Vector3.forward));
             go.GetComponent<BowBulletBehaviour>().PlayerShot = true;
             EnergyLeft[1] = EnergyRequirements[1];
-            Wait.Until(t => t >= 0.5f * ((BowLevel - 1) / 3f + 1), () => { SinceBow = 0; });
+            ShootingBow = true;
+            Wait.Until(t => t >= 0.49f * ((BowLevel - 1) / 3f + 1), () => { SinceBow = 0; ShootingBow = false; });
         }
         if (crossShot && EnergyLeft[2] <= 0)
         {

@@ -7,7 +7,7 @@ class CrossBulletBehaviour : Bullet
 {
     const float TerminalSpeed = 25;
 
-    static readonly float[] Power = { 6.0f, 5.5f, 6.0f };
+    static readonly float[] Power = { 5.0f, 5.0f, 8.0f };
 
     Vector3 origin;
     float SinceAlive;

@@ -3,8 +3,8 @@ using UnityEngine;
 
 class BackgroundGenerator : MonoBehaviour
 {
-    const float ScrollSpeed = 0.0075f;
-    const float MaxScroll = 30;
+    const float ScrollSpeed = 0.01f;
+    const float MaxScroll = 35;
 
     float TotalScroll;
 
@@ -25,10 +25,10 @@ class BackgroundGenerator : MonoBehaviour
 
     void FixedUpdate()
     {
-        TotalScroll += ScrollSpeed;
+        TotalScroll += ScrollSpeed * Mathf.Pow(Level.ScrollingSpeed, 2);
 
-        TopBackground.transform.position += Vector3.down * ScrollSpeed * Level.ScrollingSpeed;
-        BottomBackground.transform.position += Vector3.down * ScrollSpeed * Level.ScrollingSpeed;
+        TopBackground.transform.position += Vector3.down * ScrollSpeed * Mathf.Pow(Level.ScrollingSpeed, 2);
+        BottomBackground.transform.position += Vector3.down * ScrollSpeed * Mathf.Pow(Level.ScrollingSpeed, 2);
 
         if (TotalScroll > MaxScroll)
         {

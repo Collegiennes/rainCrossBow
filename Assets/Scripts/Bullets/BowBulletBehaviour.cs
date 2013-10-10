@@ -7,7 +7,7 @@ class BowBulletBehaviour : Bullet
 {
     const float Speed = 1;
 
-    static readonly float[] Power = { 200, 300, 500 };
+    static readonly float[] Power = { 200, 300, 550 };
 
     public bool PlayerShot;
     public GameObject CharginTemplate;

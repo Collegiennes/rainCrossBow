@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 class EverynianBehaviour : Enemy
@@ -7,6 +8,8 @@ class EverynianBehaviour : Enemy
 
     GameObject ToSpawn;
     public int? ForcedId;
+
+    static int? LastGiven = null;
 
     void Start()
     {
@@ -18,11 +21,23 @@ class EverynianBehaviour : Enemy
 
         bow.SetActiveRecursively(false); cross.SetActiveRecursively(false); rain.SetActiveRecursively(false);
 
-        var enabledId = ForcedId.HasValue ? ForcedId.Value : RandomHelper.Random.Next(0, 3);
+        var domain = new List<int>(new [] { 0, 1, 2 });
+
+        var shooting = GameObject.Find("Player").transform.GetComponent<Shooting>();
+        if (shooting.BowLevel == 3) domain.Remove(0);
+        if (shooting.CrossLevel == 3) domain.Remove(1);
+        if (shooting.RainLevel == 3) domain.Remove(2);
+        if (LastGiven != null) domain.Remove(LastGiven.Value);
+        if (domain.Count == 0) domain.AddRange(new [] { 0, 1, 2 });
+
+        var enabledId = ForcedId.HasValue ? ForcedId.Value : RandomHelper.InEnumerable(domain);
+
         //var enabledId = 1;
         if (enabledId == 0) { bow.SetActiveRecursively(true); ToSpawn = bow; }
         if (enabledId == 1) { cross.SetActiveRecursively(true); ToSpawn = cross; }
         if (enabledId == 2) { rain.SetActiveRecursively(true); ToSpawn = rain; }
+
+        LastGiven = enabledId;
     }
 
     public override void OnDie()
