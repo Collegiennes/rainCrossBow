@@ -95,13 +95,19 @@ class PlayerController : MonoBehaviour
                 {
                     Destroy(go);
 
-                    Wait.Until(t => t > 3.5f, () =>
-                                                  {
-                                                      foreach (var r in GetComponentsInChildren<Renderer>())
-                                                          r.enabled = true;
-                                                      transform.position = new Vector3(0, -4, 0);
-                                                      gameObject.GetComponent<Flyby>().Restart();
-                                                  });
+                    float initSS = Level.ScrollingSpeed;
+                    Wait.Until(t =>
+                        {
+                            Level.ScrollingSpeed = Mathf.Lerp(initSS, 0.8f, Mathf.Clamp01(t / 3.5f));
+                            return t > 3.5f;
+                        },
+                        () =>
+                        {
+                            foreach (var r in GetComponentsInChildren<Renderer>())
+                                r.enabled = true;
+                            transform.position = new Vector3(0, -4, 0);
+                            gameObject.GetComponent<Flyby>().Restart();
+                        });
                 }
             }
 

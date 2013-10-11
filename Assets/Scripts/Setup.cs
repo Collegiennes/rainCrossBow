@@ -59,7 +59,7 @@ class Setup : MonoBehaviour
         m.Add(Events.DrillerWave, 0);
 
         var timeOffset = 0;
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 150; i++)
         {
             var randomEvent = RandomHelper.InEnum<Events>();
             while (m.ContainsKey(randomEvent) || !randomEvent.ProbabilityRoll())
@@ -102,7 +102,7 @@ class Setup : MonoBehaviour
 
                 level.AddWall(new SpawnState { AtTime = t, Position = xOffset });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset - 1 });
-                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = (s, st) => -0.000075f - Mathf.Pow(st, 2.0f) * 0.00000275f });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = xOffset, TimeDelay = 0, ShootEvery = 0.237f, RotateSpeed = 1.0f, Acceleration = (s, st) => -0.0000725f - Mathf.Pow(st, 2.0f) * 0.00000125f });
                 level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset + 1 });
                 level.AddWall(new SpawnState { AtTime = t + 2, Position = xOffset });
                 return 4;
@@ -161,19 +161,31 @@ class Setup : MonoBehaviour
             {
                 var xOffset = RandomHelper.Random.Next(4, 7);
 
-                level.AddWall(new SpawnState { AtTime = t, Position = 0 });
+                var addWalls = RandomHelper.Probability(0.5);
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 + xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = 5 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 + xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = -5 });
-                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = xOffset, ShootEvery = 1.0f, ShootPauseTime = 0 });
+                if (addWalls)
+                {
+                    level.AddWall(new SpawnState { AtTime = t + 1, Position = -xOffset });
+                    level.AddWall(new SpawnState { AtTime = t + 1, Position = xOffset });
+                }
+                else
+                {
+                    level.AddWall(new SpawnState { AtTime = t, Position = -1 });
+                    //level.AddWall(new SpawnState { AtTime = t + 1, Position = 0 });
+                    level.AddWall(new SpawnState { AtTime = t, Position = 1 });
+                }
 
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 - xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = 5, TimeDelay = 0.5f });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 - xOffset, ShootEvery = 1.5f, ShootPauseTime = 1, Angle = -5, TimeDelay = 0.5f });
-                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = -xOffset, ShootEvery = 1.5f, ShootPauseTime = 0, TimeDelay = 0.5f });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 + xOffset, ShootEvery = 1.25f, ShootPauseTime = 1, Angle = 30 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 + xOffset, ShootEvery = 1.25f, ShootPauseTime = 1, Angle = -30 });
+                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = xOffset, ShootEvery = 1.25f, ShootPauseTime = 1, ShootPauseOffset = 1});
+
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = -1 - xOffset, ShootEvery = 1.25f, ShootPauseOffset = 1, ShootPauseTime = 1, Angle = 30 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 1, Position = 1 - xOffset, ShootEvery = 1.25f, ShootPauseOffset = 1, ShootPauseTime = 1, Angle = -30 });
+                level.AddSingleShot(new HurterSpawnState { AtTime = t, Position = -xOffset, ShootEvery = 1.25f, ShootPauseTime = 1, ShootPauseOffset = 0 });
 
                 if (addEverynyan)
                     level.AddEverynian(new SpawnState { AtTime = t + 2, Position = 0 });
-                return 2 + (addEverynyan ? 2 : 0);
+                return 3 + (addEverynyan ? 2 : 0);
             }
 
             case Events.MultiRail:
@@ -204,9 +216,9 @@ class Setup : MonoBehaviour
 
             case Events.Walled:
                 level.AddWall(new SpawnState { AtTime = t, Position = -3 });
-                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.5f, RotateSpeed = 0.5f, Clockwise = true });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = -3, ShootEvery = 0.325f, ShootPauseTime = 1, RotateSpeed = 0.5f, Clockwise = true });
                 level.AddWall(new SpawnState { AtTime = t, Position = 3 });
-                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.5f, RotateSpeed = 0.5f, Clockwise = false });
+                level.AddClock(new ClockSpawnState { AtTime = t + 1, Position = 3, ShootEvery = 0.325f, ShootPauseTime = 1, ShootPauseOffset = 1, RotateSpeed = 0.5f, Clockwise = false });
                 level.AddCarrier(new WiggleSpawnState { AtTime = t + 4, Position = -6, ShootEvery = 3.0f, WiggleSign = -1 });
                 level.AddCarrier(new HurterSpawnState { AtTime = t + 4, Position = 6, ShootEvery = 3.0f });
                 if (addEverynyan)
@@ -237,6 +249,34 @@ class Setup : MonoBehaviour
 
                 return length * 2 + (addEverynyan ? 2 : 0);
             }
+
+            case Events.Focal:
+            {
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = -7, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = 70 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 2, Angle = 55 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = -5, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = 40 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = -2, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 1, Angle = 10 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = 2, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 1, Angle = -10 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = 5, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = -40 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 2, Angle = -55 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = 7, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = -70 });
+
+                if (addEverynyan)
+                {
+                    level.AddEverynian(new SpawnState { AtTime = t + 2, Position = 0 });
+                    level.AddWall(new SpawnState { AtTime = t + 1, Position = -1 });
+                    //level.AddWall(new SpawnState { AtTime = t + 1, Position = 0 });
+                    level.AddWall(new SpawnState { AtTime = t + 1, Position = 1 });
+                }
+                else
+                {
+                    //level.AddWall(new SpawnState { AtTime = t + 1, Position = 0 });
+                    level.AddWall(new SpawnState { AtTime = t + 2, Position = -1 });
+                    level.AddWall(new SpawnState { AtTime = t + 2, Position = 1 });
+                }
+
+                return 6;
+            }
         }
 
         return 0;
@@ -256,7 +296,8 @@ enum Events
     FullWall,
     DualTriangles,
     MultiRail,
-    Wigglers
+    Wigglers,
+    Focal
 }
 
 
