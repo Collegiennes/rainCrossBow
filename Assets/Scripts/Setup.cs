@@ -252,14 +252,19 @@ class Setup : MonoBehaviour
 
             case Events.Focal:
             {
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = -7, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = 70 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 2, Angle = 55 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = -5, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = 40 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = -2, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 1, Angle = 10 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = 2, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 1, Angle = -10 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = 5, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = -40 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.675f, ShootPauseTime = 3, ShootPauseOffset = 2, Angle = -55 });
-                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = 7, ShootEvery = 0.675f, ShootPauseTime = 3, Angle = -70 });
+                t++;
+
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = -7, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 0, Angle = Mathf.Rad2Deg * Mathf.Atan2(-1, 7) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = -6, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 0, Angle = Mathf.Rad2Deg * Mathf.Atan2(-3, 6) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = -5, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 0, Angle = Mathf.Rad2Deg * Mathf.Atan2(-5, 5) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = -2, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 0, Angle = Mathf.Rad2Deg * Mathf.Atan2(-6, 2) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 5, Position = 2, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 1, Angle = Mathf.Rad2Deg * Mathf.Atan2(-6, -2) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 4, Position = 5, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 1, Angle = Mathf.Rad2Deg * Mathf.Atan2(-5, -5) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t + 2, Position = 6, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 1, Angle = Mathf.Rad2Deg * Mathf.Atan2(-3, -6) + 90 });
+                level.AddSingleShot(new SingleShotSpawnState { AtTime = t, Position = 7, ShootEvery = 0.6f, ShootPauseTime = 4, ShootPauseOffset = 1, Angle = Mathf.Rad2Deg * Mathf.Atan2(-1, -7) + 90 });
+
+                level.AddWall(new SpawnState { AtTime = t - 1, Position = -7 });
+                level.AddWall(new SpawnState { AtTime = t - 1, Position = 7 });
 
                 if (addEverynyan)
                 {
@@ -269,11 +274,7 @@ class Setup : MonoBehaviour
                     level.AddWall(new SpawnState { AtTime = t + 1, Position = 1 });
                 }
                 else
-                {
-                    //level.AddWall(new SpawnState { AtTime = t + 1, Position = 0 });
-                    level.AddWall(new SpawnState { AtTime = t + 2, Position = -1 });
-                    level.AddWall(new SpawnState { AtTime = t + 2, Position = 1 });
-                }
+                    level.AddWall(new SpawnState { AtTime = t + 2, Position = 0 });
 
                 return 6;
             }
