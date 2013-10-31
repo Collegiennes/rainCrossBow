@@ -42,6 +42,8 @@ class EverynianBehaviour : Enemy
 
     public override void OnDie()
     {
+        if (Dead) return;
+
         base.OnDie();
 
         var go = (GameObject)Instantiate(ToSpawn.transform.parent.gameObject);

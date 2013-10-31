@@ -6,7 +6,7 @@ class RainBulletBehaviour : Bullet
 {
     const float Speed = 30;
 
-    static readonly float[] Power = { 1.7f, 1.7325f, 1.8f };
+    static readonly float[] Power = { 1.75f, 1.8f, 2.25f };
 
     [HideInInspector]
     public Vector3 Direction = Vector3.up;

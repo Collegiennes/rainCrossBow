@@ -26,11 +26,12 @@ public delegate bool Condition(float elapsedSeconds);
 
 public static class Wait
 {
-    public static void Until(Condition condition, Action action)
+    public static GameObject Until(Condition condition, Action action)
     {
         var go = new GameObject("Waiter");
         var w = go.AddComponent<ConditionalBehaviour>();
         w.Condition = condition;
         w.Action = action;
+        return go;
     }
 }

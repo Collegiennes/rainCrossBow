@@ -15,6 +15,8 @@ class PlayerController : MonoBehaviour
 
     public bool Dead;
 
+    GameObject rainWaiter, bowWaiter, crossWaiter;
+
     void Start()
     {
         Keyboard = KeyboardManager.Instance;
@@ -98,7 +100,7 @@ class PlayerController : MonoBehaviour
                     float initSS = Level.ScrollingSpeed;
                     Wait.Until(t =>
                         {
-                            Level.ScrollingSpeed = Mathf.Lerp(initSS, 0.8f, Mathf.Clamp01(t / 3.5f));
+                            Level.ScrollingSpeed = Mathf.Lerp(initSS, 0.85f, Mathf.Clamp01(t / 3.5f));
                             return t > 3.5f;
                         },
                         () =>
@@ -134,21 +136,57 @@ class PlayerController : MonoBehaviour
             {
                 GetComponent<Shooting>().BowLevel = Mathf.Min(3, GetComponent<Shooting>().BowLevel + 1);
                 if (GetComponent<Shooting>().BowLevel == 3)
-                    Wait.Until(t => t >= 10, () => GetComponent<Shooting>().BowLevel = Math.Min(GetComponent<Shooting>().BowLevel, 2));
+                {
+                    if (bowWaiter != null)
+                    {
+                        Destroy(bowWaiter);
+                        bowWaiter = null;
+                    }
+                    bowWaiter = Wait.Until(t => t >= 8, () =>
+                    {
+                        if (bowWaiter != null)
+                            GetComponent<Shooting>().BowLevel = Math.Min(GetComponent<Shooting>().BowLevel, 2);
+                        bowWaiter = null;
+                    });
+                }
                 Destroy(otherGo.transform.parent.gameObject);
             }
             else if (otherGo.name.Contains("cross"))
             {
                 GetComponent<Shooting>().CrossLevel = Mathf.Min(3, GetComponent<Shooting>().CrossLevel + 1);
                 if (GetComponent<Shooting>().CrossLevel == 3)
-                    Wait.Until(t => t >= 8, () => GetComponent<Shooting>().CrossLevel = Math.Min(GetComponent<Shooting>().CrossLevel, 2));
+                {
+                    if (crossWaiter != null)
+                    {
+                        Destroy(crossWaiter);
+                        crossWaiter = null;
+                    }
+                    crossWaiter = Wait.Until(t => t >= 8, () =>
+                    {
+                        if (crossWaiter != null)
+                            GetComponent<Shooting>().CrossLevel = Math.Min(GetComponent<Shooting>().CrossLevel, 2);
+                        crossWaiter = null;
+                    });
+                }
                 Destroy(otherGo.transform.parent.gameObject);
             }
             else if (otherGo.name.Contains("rain"))
             {
                 GetComponent<Shooting>().RainLevel = Mathf.Min(3, GetComponent<Shooting>().RainLevel + 1);
                 if (GetComponent<Shooting>().RainLevel == 3)
-                    Wait.Until(t => t >= 6, () => GetComponent<Shooting>().RainLevel = Math.Min(GetComponent<Shooting>().RainLevel, 2));
+                {
+                    if (rainWaiter != null)
+                    {
+                        Destroy(rainWaiter);
+                        rainWaiter = null;
+                    }
+                    rainWaiter = Wait.Until(t => t >= 8, () =>
+                    {
+                        if (rainWaiter != null)
+                            GetComponent<Shooting>().RainLevel = Math.Min(GetComponent<Shooting>().RainLevel, 2);
+                        rainWaiter = null;
+                    });
+                }
                 Destroy(otherGo.transform.parent.gameObject);
             }
         }
